@@ -6,7 +6,7 @@
     app:startDestination="@id/splashScreenFragment">
     <fragment
         android:id="@+id/splashScreenFragment"
-        android:name="com.vishalag53.pokedex.splashscreen.SplashScreenFragment"
+        android:name="com.vishalag53.pokedex.SplashScreenFragment"
         android:label="fragment_splash_screen"
         tools:layout="@layout/fragment_splash_screen" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/homeSplashScreenFragment"
-        android:name="com.vishalag53.pokedex.splashscreen.HomeSplashScreenFragment"
+        android:name="com.vishalag53.pokedex.HomeFragment"
         android:label="fragment_home_splash_screen"
-        tools:layout="@layout/fragment_home_splash_screen" />
+        tools:layout="@layout/fragment_home" />
 </navigation>

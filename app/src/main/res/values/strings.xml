@@ -2,4 +2,14 @@
     <string name="app_name">Pokedex</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="contains">Contains</string>
+    <string name="ability_pokemon">Ability of All Pokemon</string>
+    <string name="generation_pokemon">Generation of All Pokemon</string>
+    <string name="move_pokemon">Move of All Pokemon</string>
+    <string name="pokedex_pokemon">Pokedex of All Pokemon</string>
+    <string name="pokemon_species_pokemon">Pokemon Species of All Pokemon</string>
+    <string name="region_pokemon">Region of All Pokemon</string>
+    <string name="stat_pokemon">Stat of All Pokemon</string>
+    <string name="type_pokemon">Type of All Pokemon</string>
+    <string name="favorite_pokemon">Favorite Pokemon</string>
 </resources>

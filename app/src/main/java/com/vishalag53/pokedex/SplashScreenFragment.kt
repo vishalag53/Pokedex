@@ -1,4 +1,4 @@
-package com.vishalag53.pokedex.splashscreen
+package com.vishalag53.pokedex
 
 import android.os.Bundle
 import android.os.Handler
