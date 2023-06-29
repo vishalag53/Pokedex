@@ -17,5 +17,21 @@
         android:id="@+id/homeSplashScreenFragment"
         android:name="com.vishalag53.pokedex.HomeFragment"
         android:label="fragment_home_splash_screen"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_pokedexFragment"
+            app:destination="@id/pokedexFragment" />
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_abilityFragment"
+            app:destination="@id/abilityFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pokedexFragment"
+        android:name="com.vishalag53.pokedex.PokedexFragment"
+        android:label="fragment_pokedex"
+        tools:layout="@layout/fragment_pokedex" />
+    <fragment
+        android:id="@+id/abilityFragment"
+        android:name="com.vishalag53.pokedex.AbilityFragment"
+        android:label="AbilityFragment" />
 </navigation>

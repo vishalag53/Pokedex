@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.vishalag53.pokedex.databinding.FragmentHomeBinding
 
 
@@ -22,6 +24,14 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater,R.layout.fragment_home,container,false)
 
         anim()
+
+        binding.pokedexImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_pokedexFragment)
+        }
+
+        binding.abilityImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_abilityFragment)
+        }
 
         return binding.root
     }
@@ -42,5 +52,6 @@ class HomeFragment : Fragment() {
         binding.statImgBtn.animation = animRight
         binding.favoriteImgBtn.animation = animRight
     }
+
 
 }

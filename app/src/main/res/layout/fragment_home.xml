@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="homeFragment"
+            type="com.vishalag53.pokedex.HomeFragment" />
 
     </data>
 
