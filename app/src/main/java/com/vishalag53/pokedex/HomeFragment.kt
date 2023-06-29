@@ -22,6 +22,7 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater,R.layout.fragment_home,container,false)
+        val view = binding.root
 
         anim()
 
@@ -33,7 +34,35 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_abilityFragment)
         }
 
-        return binding.root
+        binding.generationImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_generationFragment)
+        }
+
+        binding.moveImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_moveFragment)
+        }
+
+        binding.pokemonSpeciesImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_pokemonSpeciesFragment)
+        }
+
+        binding.regionImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_regionsFragment)
+        }
+
+        binding.statImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_statFragment)
+        }
+
+        binding.typeImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_typeFragment)
+        }
+
+        binding.favoriteImgBtn.setOnClickListener{
+            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_favoriteFragment)
+        }
+
+        return view
     }
 
     private fun anim() {
@@ -52,6 +81,5 @@ class HomeFragment : Fragment() {
         binding.statImgBtn.animation = animRight
         binding.favoriteImgBtn.animation = animRight
     }
-
 
 }

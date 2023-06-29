@@ -1,5 +1,6 @@
 package com.vishalag53.pokedex
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -28,12 +29,11 @@ class SplashScreenFragment : Fragment() {
         },3000)
 
         binding = FragmentSplashScreenBinding.inflate(layoutInflater)
-
-        //binding = DataBindingUtil.inflate(inflater,R.layout.fragment_splash_screen,container,false)
+        val view = binding.root
 
         anim()
 
-        return binding.root
+        return view
     }
 
     private fun anim() {

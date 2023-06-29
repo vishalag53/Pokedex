@@ -24,14 +24,63 @@
         <action
             android:id="@+id/navigate_homeSplashScreenFragment_to_abilityFragment"
             app:destination="@id/abilityFragment" />
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_generationFragment"
+            app:destination="@id/generationFragment" />
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_moveFragment"
+            app:destination="@id/moveFragment" />
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_pokemonSpeciesFragment"
+            app:destination="@id/pokemonSpeciesFragment" />
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_regionsFragment"
+            app:destination="@id/regionsFragment" />
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_statFragment"
+            app:destination="@id/statFragment" />
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_typeFragment"
+            app:destination="@id/typeFragment" />
+        <action
+            android:id="@+id/navigate_homeSplashScreenFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/pokedexFragment"
-        android:name="com.vishalag53.pokedex.PokedexFragment"
+        android:name="com.vishalag53.pokedex.pokedex.PokedexFragment"
         android:label="fragment_pokedex"
         tools:layout="@layout/fragment_pokedex" />
     <fragment
         android:id="@+id/abilityFragment"
-        android:name="com.vishalag53.pokedex.AbilityFragment"
+        android:name="com.vishalag53.pokedex.ability.AbilityFragment"
         android:label="AbilityFragment" />
+    <fragment
+        android:id="@+id/generationFragment"
+        android:name="com.vishalag53.pokedex.generation.GenerationFragment"
+        android:label="GenerationFragment" />
+    <fragment
+        android:id="@+id/moveFragment"
+        android:name="com.vishalag53.pokedex.move.MoveFragment"
+        android:label="MoveFragment" />
+    <fragment
+        android:id="@+id/pokemonSpeciesFragment"
+        android:name="com.vishalag53.pokedex.pokemonSpecies.PokemonSpeciesFragment"
+        android:label="PokemonSpeciesFragment" />
+    <fragment
+        android:id="@+id/regionsFragment"
+        android:name="com.vishalag53.pokedex.regions.RegionsFragment"
+        android:label="RegionsFragment" />
+    <fragment
+        android:id="@+id/statFragment"
+        android:name="com.vishalag53.pokedex.stat.StatFragment"
+        android:label="StatFragment" />
+    <fragment
+        android:id="@+id/typeFragment"
+        android:name="com.vishalag53.pokedex.type.TypeFragment"
+        android:label="TypeFragment" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.vishalag53.pokedex.favorite.FavoriteFragment"
+        android:label="FavoriteFragment" />
 </navigation>
