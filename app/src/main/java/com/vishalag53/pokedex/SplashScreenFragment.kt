@@ -10,11 +10,15 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.vishalag53.pokedex.R
+import com.vishalag53.pokedex.databinding.FragmentSplashScreenBinding
 
 class SplashScreenFragment : Fragment() {
 
+    lateinit var binding: FragmentSplashScreenBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -22,18 +26,22 @@ class SplashScreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             findNavController().navigate(R.id.navigate_splashScreenFragment_to_homeSplashScreenFragment)
         },3000)
-        val view = inflater.inflate(R.layout.fragment_splash_screen,container,false)
 
-        val animTop = AnimationUtils.loadAnimation(view.context,R.anim.from_top)
-        val animBottom =AnimationUtils.loadAnimation(view.context,R.anim.from_bottom)
+        binding = FragmentSplashScreenBinding.inflate(layoutInflater)
 
-        val txtSplash = view.findViewById<TextView>(R.id.txtView)
-        val imgSplash = view.findViewById<ImageView>(R.id.imageView)
+        //binding = DataBindingUtil.inflate(inflater,R.layout.fragment_splash_screen,container,false)
 
-        txtSplash.animation = animBottom
-        imgSplash.animation = animTop
+        anim()
 
-        return view
+        return binding.root
+    }
+
+    private fun anim() {
+        val animTop = AnimationUtils.loadAnimation(binding.root.context,R.anim.from_top)
+        val animBottom =AnimationUtils.loadAnimation(binding.root.context,R.anim.from_bottom)
+
+        binding.imgView.animation = animBottom
+        binding.imageView.animation = animTop
     }
 
 }
