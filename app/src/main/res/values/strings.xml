@@ -12,4 +12,13 @@
     <string name="stat_pokemon">Stat of All Pokemon</string>
     <string name="type_pokemon">Type of All Pokemon</string>
     <string name="favorite_pokemon">Favorite Pokemon</string>
+    <string name="ability">Ability</string>
+    <string name="generation">Generation</string>
+    <string name="move">Move</string>
+    <string name="pokedex">Pokedex</string>
+    <string name="species">Species</string>
+    <string name="regions">Regions</string>
+    <string name="stat">Stat</string>
+    <string name="type">Type</string>
+    <string name="favorite">Favorite</string>
 </resources>

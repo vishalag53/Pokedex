@@ -69,7 +69,7 @@ class HomeFragment : Fragment() {
         val animLeft = AnimationUtils.loadAnimation(binding.root.context,R.anim.from_left)
         val animRight = AnimationUtils.loadAnimation(binding.root.context,R.anim.from_right)
 
-        binding.contentsTxtView.animation = animLeft
+
         binding.generationImgBtn.animation = animLeft
         binding.pokedexImgBtn.animation = animLeft
         binding.regionImgBtn.animation = animLeft

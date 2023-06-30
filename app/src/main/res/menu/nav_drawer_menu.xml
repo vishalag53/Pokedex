@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/abilityFragment"
+        android:icon="@drawable/ability1"
+        android:title="@string/ability" />
+
+    <item
+        android:id="@+id/generationFragment"
+        android:icon="@drawable/generation1"
+        android:title="@string/generation" />
+
+    <item
+        android:id="@+id/moveFragment"
+        android:icon="@drawable/move1"
+        android:title="@string/move" />
+
+    <item
+        android:id="@+id/pokedexFragment"
+        android:icon="@drawable/pokedex2"
+        android:title="@string/pokedex" />
+
+    <item
+        android:id="@+id/pokemonSpeciesFragment"
+        android:icon="@drawable/species1"
+        android:title="@string/species" />
+
+    <item
+        android:id="@+id/regionsFragment"
+        android:icon="@drawable/region1"
+        android:title="@string/regions" />
+
+    <item
+        android:id="@+id/statFragment"
+        android:icon="@drawable/stat1"
+        android:title="@string/stat" />
+
+    <item
+        android:id="@+id/typeFragment"
+        android:icon="@drawable/type1"
+        android:title="@string/type" />
+
+    <item
+        android:id="@+id/favoriteFragment"
+        android:icon="@drawable/baseline_favorite_24"
+        android:title="@string/favorite" />
+
+
+</menu>

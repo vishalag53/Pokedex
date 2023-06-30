@@ -3,20 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/splashScreenFragment">
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.vishalag53.pokedex.SplashScreenFragment"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" >
-        <action
-            android:id="@+id/navigate_splashScreenFragment_to_homeSplashScreenFragment"
-            app:destination="@id/homeSplashScreenFragment" />
-    </fragment>
+    app:startDestination="@id/homeSplashScreenFragment">
     <fragment
         android:id="@+id/homeSplashScreenFragment"
         android:name="com.vishalag53.pokedex.HomeFragment"
-        android:label="fragment_home_splash_screen"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/navigate_homeSplashScreenFragment_to_pokedexFragment"
@@ -49,38 +40,38 @@
     <fragment
         android:id="@+id/pokedexFragment"
         android:name="com.vishalag53.pokedex.pokedex.PokedexFragment"
-        android:label="fragment_pokedex"
+        android:label="@string/app_name"
         tools:layout="@layout/fragment_pokedex" />
     <fragment
         android:id="@+id/abilityFragment"
         android:name="com.vishalag53.pokedex.ability.AbilityFragment"
-        android:label="AbilityFragment" />
+        android:label="@string/ability" />
     <fragment
         android:id="@+id/generationFragment"
         android:name="com.vishalag53.pokedex.generation.GenerationFragment"
-        android:label="GenerationFragment" />
+        android:label="@string/generation" />
     <fragment
         android:id="@+id/moveFragment"
         android:name="com.vishalag53.pokedex.move.MoveFragment"
-        android:label="MoveFragment" />
+        android:label="@string/move" />
     <fragment
         android:id="@+id/pokemonSpeciesFragment"
         android:name="com.vishalag53.pokedex.pokemonSpecies.PokemonSpeciesFragment"
-        android:label="PokemonSpeciesFragment" />
+        android:label="@string/species" />
     <fragment
         android:id="@+id/regionsFragment"
         android:name="com.vishalag53.pokedex.regions.RegionsFragment"
-        android:label="RegionsFragment" />
+        android:label="@string/regions" />
     <fragment
         android:id="@+id/statFragment"
         android:name="com.vishalag53.pokedex.stat.StatFragment"
-        android:label="StatFragment" />
+        android:label="@string/stat" />
     <fragment
         android:id="@+id/typeFragment"
         android:name="com.vishalag53.pokedex.type.TypeFragment"
-        android:label="TypeFragment" />
+        android:label="@string/type" />
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.vishalag53.pokedex.favorite.FavoriteFragment"
-        android:label="FavoriteFragment" />
+        android:label="@string/favorite" />
 </navigation>
