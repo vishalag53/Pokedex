@@ -5,4 +5,34 @@
     <color name="colorAccent">#7e53c5</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="LightBlue">#FFBAC7FF</color>
+    <color name="lightGrey">#FFAAAAAA</color>
+
+    <color name="HPColor"></color>
+    <color name="AtkColor"></color>
+    <color name="DefColor"></color>
+    <color name="SpAtkColor"></color>
+    <color name="SpDefColor"></color>
+    <color name="SpdColor"></color>
+
+    <color name="TypeNormal"></color>
+    <color name="TypeFire"></color>
+    <color name="TypeWater"></color>
+    <color name="TypeElectric"></color>
+    <color name="TypeGrass"></color>
+    <color name="TypeIce"></color>
+    <color name="TypeFighting"></color>
+    <color name="TypePoison"></color>
+    <color name="TypeGround"></color>
+    <color name="TypeFlying"></color>
+    <color name="TypePsychic"></color>
+    <color name="TypeBug"></color>
+    <color name="TypeRock"></color>
+    <color name="TypeGhost"></color>
+    <color name="TypeDragon"></color>
+    <color name="TypeDark"></color>
+    <color name="TypeSteel"></color>
+    <color name="TypeFairy"></color>
+
 </resources>

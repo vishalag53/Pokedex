@@ -60,7 +60,24 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 
+//    Used the Save Args Arguments
+//    private fun getShareIntent(): Intent {
+//        val args =  .fromBundle(requireArguments())
+//        /*val shareIntent = Intent(Intent.ACTION_SEND)
+//        shareIntent.setType("text/plain")
+//            .putExtra(Intent.EXTRA_TEXT,getString(R.string.share_success_text,args.numCorrect,args.numQuestions))
+//
+//        return shareIntent*/
+//
+//        return ShareCompat.IntentBuilder.from(requireActivity())
+//            .setText(getString(R.string.share_success_text, args.numCorrect, args.numQuestions))
+//            .setType("text/plain")
+//            .intent
+//    }
 
+    private fun shareSuccess() {
+        //startActivity((getShareIntent()))
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
@@ -81,8 +98,14 @@ class MainActivity : AppCompatActivity() {
                 navController.navigate(R.id.favoriteFragment)
                 true
             }
+            R.id.share -> {
+                shareSuccess()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+
     }
+
 
 }

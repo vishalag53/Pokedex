@@ -1,11 +1,13 @@
 package com.vishalag53.pokedex
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import androidx.activity.addCallback
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
@@ -21,53 +23,70 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater,R.layout.fragment_home,container,false)
+        binding = DataBindingUtil.inflate<FragmentHomeBinding>(
+            inflater,
+            R.layout.fragment_home,
+            container,
+            false
+        )
         val view = binding.root
 
         anim()
 
-        binding.pokedexImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_pokedexFragment)
+        binding.pokedexImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokedexFragment())
         }
 
-        binding.abilityImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_abilityFragment)
+        binding.abilityImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToAbilityFragment())
         }
 
-        binding.generationImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_generationFragment)
+        binding.generationImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToGenerationFragment())
         }
 
-        binding.moveImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_moveFragment)
+        binding.moveImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToMoveFragment())
         }
 
-        binding.pokemonSpeciesImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_pokemonSpeciesFragment)
+        binding.pokemonSpeciesImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokemonSpeciesFragment())
         }
 
-        binding.regionImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_regionsFragment)
+        binding.regionImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToRegionsFragment())
         }
 
-        binding.statImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_statFragment)
+        binding.statImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToStatFragment())
         }
 
-        binding.typeImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_typeFragment)
+        binding.typeImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToTypeFragment())
         }
 
-        binding.favoriteImgBtn.setOnClickListener{
-            findNavController().navigate(R.id.navigate_homeSplashScreenFragment_to_favoriteFragment)
+        binding.favoriteImgBtn.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToFavoriteFragment())
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().popBackStack(R.id.splashScreenFragment, false)
+            goToHomeScreenOfMobile()
         }
 
         return view
     }
 
+    private fun goToHomeScreenOfMobile() {
+        val intent = Intent(Intent.ACTION_MAIN)
+        intent.addCategory(Intent.CATEGORY_HOME)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
+
     private fun anim() {
-        val animLeft = AnimationUtils.loadAnimation(binding.root.context,R.anim.from_left)
-        val animRight = AnimationUtils.loadAnimation(binding.root.context,R.anim.from_right)
+        val animLeft = AnimationUtils.loadAnimation(binding.root.context, R.anim.from_left)
+        val animRight = AnimationUtils.loadAnimation(binding.root.context, R.anim.from_right)
 
 
         binding.generationImgBtn.animation = animLeft
