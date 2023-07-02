@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.vishalag53.pokedex.R
 import com.vishalag53.pokedex.databinding.FragmentPokedexBinding
 
@@ -20,10 +21,12 @@ class PokedexFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pokedex,container,false)
-        val view = binding.root
 
+        binding.linearLayout.setOnClickListener{
+            findNavController().navigate(PokedexFragmentDirections.navigatePokedexFragmentToPokemonDetailFragment())
+        }
 
-        return view
+        return binding.root
     }
 
 }

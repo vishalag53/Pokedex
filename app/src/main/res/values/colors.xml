@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#7e53c5</color>
@@ -9,30 +10,30 @@
     <color name="LightBlue">#FFBAC7FF</color>
     <color name="lightGrey">#FFAAAAAA</color>
 
-    <color name="HPColor"></color>
-    <color name="AtkColor"></color>
-    <color name="DefColor"></color>
-    <color name="SpAtkColor"></color>
-    <color name="SpDefColor"></color>
-    <color name="SpdColor"></color>
+    <color name="HPColor">#FFF5FF00</color>
+    <color name="AtkColor">#A6FF0000</color>
+    <color name="DefColor">#712F6EFF</color>
+    <color name="SpAtkColor">#92AB00FF</color>
+    <color name="SpDefColor">#B300CCFF</color>
+    <color name="SpdColor">#8C00FF0F</color>
 
-    <color name="TypeNormal"></color>
-    <color name="TypeFire"></color>
-    <color name="TypeWater"></color>
-    <color name="TypeElectric"></color>
-    <color name="TypeGrass"></color>
-    <color name="TypeIce"></color>
-    <color name="TypeFighting"></color>
-    <color name="TypePoison"></color>
-    <color name="TypeGround"></color>
-    <color name="TypeFlying"></color>
-    <color name="TypePsychic"></color>
-    <color name="TypeBug"></color>
-    <color name="TypeRock"></color>
-    <color name="TypeGhost"></color>
-    <color name="TypeDragon"></color>
-    <color name="TypeDark"></color>
-    <color name="TypeSteel"></color>
-    <color name="TypeFairy"></color>
+    <color name="TypeNormal">#FFA8A77A</color>
+    <color name="TypeFire">#FFEE8130</color>
+    <color name="TypeWater">#FF6390F0</color>
+    <color name="TypeElectric">#FFF7D02C</color>
+    <color name="TypeGrass">#FF7AC74C</color>
+    <color name="TypeIce">#FF96D9D6</color>
+    <color name="TypeFighting">#FFC22E28</color>
+    <color name="TypePoison">#FFA33EA1</color>
+    <color name="TypeGround">#FFE2BF65</color>
+    <color name="TypeFlying">#FFA98FF3</color>
+    <color name="TypePsychic">#FFF95587</color>
+    <color name="TypeBug">#FFA6B91A</color>
+    <color name="TypeRock">#FFB6A136</color>
+    <color name="TypeGhost">#FF735797</color>
+    <color name="TypeDragon">#FF6F35FC</color>
+    <color name="TypeDark">#FF705746</color>
+    <color name="TypeSteel">#FFB7B7CE</color>
+    <color name="TypeFairy">#FFD685AD</color>
 
 </resources>

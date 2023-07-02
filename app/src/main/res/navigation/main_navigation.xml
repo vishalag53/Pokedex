@@ -41,7 +41,11 @@
         android:id="@+id/pokedexFragment"
         android:name="com.vishalag53.pokedex.pokedex.PokedexFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_pokedex" />
+        tools:layout="@layout/fragment_pokedex" >
+        <action
+            android:id="@+id/navigate_pokedexFragment_to_pokemonDetailFragment"
+            app:destination="@id/pokemonDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/abilityFragment"
         android:name="com.vishalag53.pokedex.ability.AbilityFragment"
@@ -74,4 +78,8 @@
         android:id="@+id/favoriteFragment"
         android:name="com.vishalag53.pokedex.favorite.FavoriteFragment"
         android:label="@string/favorite" />
+    <fragment
+        android:id="@+id/pokemonDetailFragment"
+        android:name="com.vishalag53.pokedex.pokedex.PokemonDetailFragment"
+        android:label="PokemonDetailFragment" />
 </navigation>
