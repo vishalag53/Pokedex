@@ -25,6 +25,20 @@
                 android:layout_height="wrap_content">
 
                 <ImageButton
+                    android:id="@+id/PokemonImgBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="125dp"
+                    android:layout_marginTop="10dp"
+                    android:contentDescription="@string/pokemon"
+                    android:paddingTop="15dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/pokemon1"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <ImageButton
                     android:id="@+id/abilityImgBtn"
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
@@ -35,7 +49,7 @@
                     android:src="@drawable/ability"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/PokemonImgBtn" />
 
                 <ImageButton
                     android:id="@+id/generationImgBtn"

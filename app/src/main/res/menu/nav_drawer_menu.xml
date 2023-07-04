@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/pokemonFragment"
+        android:icon="@drawable/pokemon"
+        android:title="Pokemon"/>
+
+    <item
         android:id="@+id/abilityFragment"
         android:icon="@drawable/ability1"
         android:title="@string/ability" />

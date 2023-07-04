@@ -33,6 +33,10 @@ class HomeFragment : Fragment() {
 
         anim()
 
+        binding.PokemonImgBtn.setOnClickListener { 
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPokemonFragment())
+        }
+
         binding.pokedexImgBtn.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokedexFragment())
         }

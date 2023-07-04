@@ -1,4 +1,4 @@
-package com.vishalag53.pokedex.pokedex
+package com.vishalag53.pokedex.pokemon
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
