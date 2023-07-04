@@ -22,9 +22,7 @@ class PokedexFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_pokedex,container,false)
 
-        binding.linearLayout.setOnClickListener{
-            findNavController().navigate(PokedexFragmentDirections.navigatePokedexFragmentToPokemonDetailFragment())
-        }
+
 
         return binding.root
     }

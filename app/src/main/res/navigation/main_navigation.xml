@@ -11,31 +11,85 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/navigate_homeFragment_to_pokedexFragment"
-            app:destination="@id/pokedexFragment" />
+            app:destination="@id/pokedexFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
         <action
             android:id="@+id/navigate_homeFragment_to_abilityFragment"
-            app:destination="@id/abilityFragment" />
+            app:destination="@id/abilityFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
         <action
             android:id="@+id/navigate_homeFragment_to_generationFragment"
-            app:destination="@id/generationFragment" />
+            app:destination="@id/generationFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
         <action
             android:id="@+id/navigate_homeFragment_to_moveFragment"
-            app:destination="@id/moveFragment" />
+            app:destination="@id/moveFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
         <action
             android:id="@+id/navigate_homeFragment_to_pokemonSpeciesFragment"
-            app:destination="@id/pokemonSpeciesFragment" />
+            app:destination="@id/pokemonSpeciesFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
         <action
             android:id="@+id/navigate_homeFragment_to_regionsFragment"
-            app:destination="@id/regionsFragment" />
+            app:destination="@id/regionsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
         <action
             android:id="@+id/navigate_homeFragment_to_statFragment"
-            app:destination="@id/statFragment" />
+            app:destination="@id/statFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
         <action
             android:id="@+id/navigate_homeFragment_to_typeFragment"
-            app:destination="@id/typeFragment" />
+            app:destination="@id/typeFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
         <action
             android:id="@+id/navigate_homeFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            app:destination="@id/favoriteFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/pokedexFragment"
@@ -44,42 +98,57 @@
         tools:layout="@layout/fragment_pokedex" >
         <action
             android:id="@+id/navigate_pokedexFragment_to_pokemonDetailFragment"
-            app:destination="@id/pokemonDetailFragment" />
+            app:destination="@id/pokemonDetailFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/pokedexFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
     <fragment
         android:id="@+id/abilityFragment"
         android:name="com.vishalag53.pokedex.ability.AbilityFragment"
-        android:label="@string/ability" />
+        android:label="@string/ability"
+        tools:layout="@layout/fragment_ability" />
     <fragment
         android:id="@+id/generationFragment"
         android:name="com.vishalag53.pokedex.generation.GenerationFragment"
-        android:label="@string/generation" />
+        android:label="@string/generation"
+        tools:layout="@layout/fragment_generation"/>
     <fragment
         android:id="@+id/moveFragment"
         android:name="com.vishalag53.pokedex.move.MoveFragment"
-        android:label="@string/move" />
+        android:label="@string/move"
+        tools:layout="@layout/fragment_move"/>
     <fragment
         android:id="@+id/pokemonSpeciesFragment"
         android:name="com.vishalag53.pokedex.pokemonSpecies.PokemonSpeciesFragment"
-        android:label="@string/species" />
+        android:label="@string/species"
+        tools:layout="@layout/fragment_pokemon_species"/>
     <fragment
         android:id="@+id/regionsFragment"
         android:name="com.vishalag53.pokedex.regions.RegionsFragment"
-        android:label="@string/regions" />
+        android:label="@string/regions"
+        tools:layout="@layout/fragment_regions"/>
     <fragment
         android:id="@+id/statFragment"
         android:name="com.vishalag53.pokedex.stat.StatFragment"
-        android:label="@string/stat" />
+        android:label="@string/stat"
+        tools:layout="@layout/fragment_stat"/>
     <fragment
         android:id="@+id/typeFragment"
         android:name="com.vishalag53.pokedex.type.TypeFragment"
-        android:label="@string/type" />
+        android:label="@string/type"
+        tools:layout="@layout/fragment_type"/>
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.vishalag53.pokedex.favorite.FavoriteFragment"
-        android:label="@string/favorite" />
+        android:label="@string/favorite"
+        tools:layout="@layout/fragment_favorite"/>
     <fragment
         android:id="@+id/pokemonDetailFragment"
         android:name="com.vishalag53.pokedex.pokedex.PokemonDetailFragment"
-        android:label="PokemonDetailFragment" />
+        android:label="PokemonDetailFragment"
+        tools:layout="@layout/fragment_pokemon_detail"/>
 </navigation>
