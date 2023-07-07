@@ -2,52 +2,52 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/pokemonFragment"
+        android:id="@+id/pokemonOverviewFragment"
         android:icon="@drawable/pokemon"
         android:title="Pokemon"/>
 
     <item
-        android:id="@+id/abilityFragment"
+        android:id="@+id/abilityOverviewFragment"
         android:icon="@drawable/ability1"
         android:title="@string/ability" />
 
     <item
-        android:id="@+id/generationFragment"
+        android:id="@+id/generationOverviewFragment"
         android:icon="@drawable/generation1"
         android:title="@string/generation" />
 
     <item
-        android:id="@+id/moveFragment"
+        android:id="@+id/moveOverviewFragment"
         android:icon="@drawable/move1"
         android:title="@string/move" />
 
     <item
-        android:id="@+id/pokedexFragment"
+        android:id="@+id/pokedexOverviewFragment"
         android:icon="@drawable/pokedex2"
         android:title="@string/pokedex" />
 
     <item
-        android:id="@+id/pokemonSpeciesFragment"
+        android:id="@+id/pokemonSpeciesOverviewFragment"
         android:icon="@drawable/species1"
         android:title="@string/species" />
 
     <item
-        android:id="@+id/regionsFragment"
+        android:id="@+id/regionsOverviewFragment"
         android:icon="@drawable/region1"
         android:title="@string/regions" />
 
     <item
-        android:id="@+id/statFragment"
+        android:id="@+id/statOverviewFragment"
         android:icon="@drawable/stat1"
         android:title="@string/stat" />
 
     <item
-        android:id="@+id/typeFragment"
+        android:id="@+id/typeOverviewFragment"
         android:icon="@drawable/type1"
         android:title="@string/type" />
 
     <item
-        android:id="@+id/favoriteFragment"
+        android:id="@+id/favoriteOverviewFragment"
         android:icon="@drawable/baseline_favorite_24"
         android:title="@string/favorite" />
 

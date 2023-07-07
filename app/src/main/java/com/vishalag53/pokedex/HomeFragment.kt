@@ -34,43 +34,43 @@ class HomeFragment : Fragment() {
         anim()
 
         binding.PokemonImgBtn.setOnClickListener { 
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToPokemonFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokemonOverviewFragment())
         }
 
         binding.pokedexImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokedexFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokedexOverviewFragment())
         }
 
         binding.abilityImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToAbilityFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToAbilityOverviewFragment())
         }
 
         binding.generationImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToGenerationFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToGenerationOverviewFragment())
         }
 
         binding.moveImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToMoveFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToMoveOverviewFragment())
         }
 
         binding.pokemonSpeciesImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokemonSpeciesFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokemonSpeciesOverviewFragment())
         }
 
         binding.regionImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToRegionsFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToRegionsOverviewFragment())
         }
 
         binding.statImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToStatFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToStatOverviewFragment())
         }
 
         binding.typeImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToTypeFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToTypeOverviewFragment())
         }
 
         binding.favoriteImgBtn.setOnClickListener {
-            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToFavoriteFragment())
+            findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToFavoriteOverviewFragment())
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {

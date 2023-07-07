@@ -62,7 +62,7 @@ class MainActivity : AppCompatActivity() {
         val favMenu = menu?.findItem(R.id.favMenu)
 
         favMenu?.setOnMenuItemClickListener {
-            navController.navigate(R.id.favoriteFragment)
+            navController.navigate(R.id.favoriteOverviewFragment)
             true
         }
         return super.onCreateOptionsMenu(menu)
@@ -70,8 +70,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.favoriteFragment -> {
-                navController.navigate(R.id.favoriteFragment)
+            R.id.favoriteOverviewFragment -> {
+                navController.navigate(R.id.favoriteOverviewFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)
