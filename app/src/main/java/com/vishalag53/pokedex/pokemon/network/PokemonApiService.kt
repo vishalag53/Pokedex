@@ -1,22 +1,27 @@
 package com.vishalag53.pokedex.pokemon.network
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Call
 import retrofit2.Retrofit
-import retrofit2.converter.scalars.ScalarsConverterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
 private const val BASE_URL = "https://pokeapi.co/api/v2/"
 
-private val retrofit = Retrofit.Builder()
-    .addConverterFactory(ScalarsConverterFactory.create())
-    .baseUrl(BASE_URL)
+private val moshi = Moshi.Builder()
+    .add(KotlinJsonAdapterFactory())
     .build()
 
-interface PokemonApiService{
+private val retrofit = Retrofit.Builder()
+    .baseUrl(BASE_URL)
+    .addConverterFactory(MoshiConverterFactory.create(moshi))
+    .build()
 
+
+interface PokemonApiService{
     @GET("pokemon")
-    fun getProperties():
-            Call<String>
+    fun getPokemonList(): Call<PokemonListProperty>
 }
 
 object PokemonApi{
