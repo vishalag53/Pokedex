@@ -6,6 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.vishalag53.pokedex.pokemon.network.PokemonApi
 import com.vishalag53.pokedex.pokemon.network.PokemonInfo
 import com.vishalag53.pokedex.pokemon.network.PokemonListProperty
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,35 +22,31 @@ class PokemonOverviewViewModel : ViewModel(){
     val response: LiveData<String>
         get() = _response
 
+    private var viewModelJob = Job()
+    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
+
+
     init {
         getPokemonProperties()
     }
 
     private fun getPokemonProperties() {
-        PokemonApi.retrofitService.getPokemonList().enqueue(object: Callback<PokemonListProperty>{
-            override fun onResponse(call: Call<PokemonListProperty>, response: Response<PokemonListProperty>) {
-                    _response.value = "Success:   Pokemon properties retrieved"
+        coroutineScope.launch {
+            var getPropertiesDeferred = PokemonApi.retrofitService.getPokemonList()
+            try {
+                val result = getPropertiesDeferred.await()
+                _response.value = "Success:   Pokemon properties retrieved"
+            } catch (e: Exception){
+                _response.value = "Failure: ${e.message} "
             }
 
-            override fun onFailure(call: Call<PokemonListProperty>, t: Throwable) {
-                _response.value = "Failure: " + t.message
-            }
-
-        })
-
-//
-//        PokemonApi.retrofitService.getPokemonInfo().enqueue(object: Callback<PokemonInfo>{
-//            override fun onResponse(call: Call<PokemonInfo>, response: Response<PokemonInfo>) {
-//                _response.value = "Success:   Pokemon properties retrieved"
-//            }
-//
-//            override fun onFailure(call: Call<PokemonInfo>, t: Throwable) {
-//                _response.value = "Failure: " + t.message
-//            }
-//
-//        })
+        }
 
 
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 }
