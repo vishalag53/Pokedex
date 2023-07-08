@@ -2,6 +2,8 @@ package com.vishalag53.pokedex.pokemon.network
 
 import com.squareup.moshi.Json
 
+// https://pokeapi.co/api/v2/pokemon/
+
 data class PokemonListProperty (
     @Json(name = "count")   val count: Int,
     @Json(name = "next")    val next: String?,

@@ -22,6 +22,9 @@ private val retrofit = Retrofit.Builder()
 interface PokemonApiService{
     @GET("pokemon")
     fun getPokemonList(): Call<PokemonListProperty>
+
+    @GET("pokemon/{name}")
+    fun getPokemonInfo() : Call<PokemonInfo>
 }
 
 object PokemonApi{
