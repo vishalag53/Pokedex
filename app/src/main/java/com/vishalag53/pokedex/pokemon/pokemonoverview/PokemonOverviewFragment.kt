@@ -13,16 +13,14 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.vishalag53.pokedex.R
 import com.vishalag53.pokedex.databinding.GridListItemPokemonBinding
-import com.vishalag53.pokedex.pokemon.network.PokemonApi
-import com.vishalag53.pokedex.pokemon.network.PokemonApiUtilities
-import com.vishalag53.pokedex.pokemon.network.PokemonRepository
+import com.vishalag53.pokedex.network.PokemonApi
+import com.vishalag53.pokedex.network.PokemonApiUtilities
+import com.vishalag53.pokedex.network.PokemonRepository
 import com.vishalag53.pokedex.response.PokemonInfo
 
 class PokemonOverviewFragment : Fragment() {
 
     private lateinit var viewModel: PokemonOverviewViewModel
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -37,21 +35,30 @@ class PokemonOverviewFragment : Fragment() {
 
         val pokemonRepository =  PokemonRepository(pokemonApi)
 
-
         viewModel = ViewModelProvider(this,PokemonOverviewViewModelFactory(pokemonRepository))[PokemonOverviewViewModel::class.java]
+
+
 
         viewModel.pokemon.observe(viewLifecycleOwner, Observer {
 //            it.results.iterator().forEach {pokemon ->
 //                binding.txtName.text = pokemon.name.toString()
 //            }
 
-            binding.txtName.text = it.results[657].name
+            Log.d("VISHAL","Pokemon")
+            val name = it.results[1].name
+            binding.txtName.text = name
+
+            Log.d("VISHAL","pokemon $name")
+            viewModel.setVariable(name)
+
+            viewModel.getInfo()
 
         })
 
-        viewModel.pokemonInfo.observe(viewLifecycleOwner,Observer{
-            loadImage(it, binding)
 
+        viewModel.pokemonInfo.observe(viewLifecycleOwner,Observer{
+            Log.d("VISHAL","PokemonInfo")
+            loadImage(it,binding)
             binding.txtNumber.text = it.id.toString()
             binding.txtType1.text = it.types[0].type.name
             binding.txtType2.text = it.types[1].type.name
