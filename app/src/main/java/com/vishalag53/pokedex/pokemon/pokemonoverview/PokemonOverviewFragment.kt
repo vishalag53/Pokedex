@@ -45,7 +45,7 @@ class PokemonOverviewFragment : Fragment() {
 //            }
 
             Log.d("VISHAL","Pokemon")
-            val name = it.results[1].name
+            val name = it.results[657].name
             binding.txtName.text = name
 
             Log.d("VISHAL","pokemon $name")
@@ -58,10 +58,12 @@ class PokemonOverviewFragment : Fragment() {
 
         viewModel.pokemonInfo.observe(viewLifecycleOwner,Observer{
             Log.d("VISHAL","PokemonInfo")
+
             loadImage(it,binding)
-            binding.txtNumber.text = it.id.toString()
-            binding.txtType1.text = it.types[0].type.name
-            binding.txtType2.text = it.types[1].type.name
+
+            txtNumber(binding, it)
+
+            txtType(it, binding)
         })
 
         //val manager = GridLayoutManager(activity,3)
@@ -70,20 +72,53 @@ class PokemonOverviewFragment : Fragment() {
         return binding.root
     }
 
+    private fun txtType(
+        it: PokemonInfo,
+        binding: GridListItemPokemonBinding,
+    ) {
+
+        View.GONE.also { binding.txtType1.visibility = it }
+
+        if(it.types.isNotEmpty()){
+            View.VISIBLE.also { binding.txtType1.visibility = it }
+            it.types[0].type.name.also { binding.txtType1.text = it }
+        }
+
+        View.GONE.also { binding.txtType2.visibility = it }
+
+        if (it.types.size >= 2) {
+            View.VISIBLE.also { binding.txtType2.visibility = it }
+            it.types[1].type.name.also { binding.txtType2.text = it }
+        }
+    }
+
+    private fun txtNumber(
+        binding: GridListItemPokemonBinding,
+        it: PokemonInfo,
+    ) =
+        when (it.id.toString().length) {
+            1 -> "#00${it.id}".also { binding.txtNumber.text = it }
+            2 -> "#0${it.id}".also { binding.txtNumber.text = it }
+            else -> "#${it.id}".also { binding.txtNumber.text = it }
+        }
+
     private fun loadImage(
         it: PokemonInfo,
         binding: GridListItemPokemonBinding,
     ) {
         val imgUrl = it.sprites.front_default
-        val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-        Glide.with(this@PokemonOverviewFragment)
-            .load(imgUri)
-            .apply(
-                RequestOptions()
-                    .placeholder(R.drawable.loading_animation)
-                    .error(R.drawable.ic_broken_image)
-            )
-            .into(binding.imgPokemon)
+        if(imgUrl == null) View.GONE.also { binding.imgPokemon.visibility = it }
+        else{
+            val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+            Glide.with(this@PokemonOverviewFragment)
+                .load(imgUri)
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .error(R.drawable.ic_broken_image)
+                )
+                .into(binding.imgPokemon)
+        }
     }
 
 

@@ -3,6 +3,8 @@ package com.vishalag53.pokedex.network
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonOverviewFragment
+import com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonOverviewViewModel
 import com.vishalag53.pokedex.response.PokemonInfo
 import com.vishalag53.pokedex.response.PokemonList
 
