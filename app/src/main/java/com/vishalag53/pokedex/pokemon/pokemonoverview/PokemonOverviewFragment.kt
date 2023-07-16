@@ -34,25 +34,25 @@ class PokemonOverviewFragment : Fragment() {
         var pokemonList = mutableListOf<PokemonView>(
             PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png","1","greninja","water","poison"),
             PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/12.png","2","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png","3","greninja","water","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png","4","greninja","water","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png","5","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png","6","greninja","water","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png","7","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png","8","greninja","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/51.png","9","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/351.png","10","greninja","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/41.png","11","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png","12","greninja","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/184.png","13","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/195.png","14","greninja","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/148.png","15","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/175.png","16","greninja","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/110.png","17","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1010.png","18","greninja","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/121.png","19","bulbasaur","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/851.png","20","greninja","grass","poison"),
-            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/951.png","21","bulbasaur","grass","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/14.png","3","greninja","fire","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/18.png","4","greninja","electric","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png","5","bulbasaur","ice","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png","6","greninja","fighting","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/16.png","7","bulbasaur","poison","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/658.png","8","greninja","ground","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/51.png","9","bulbasaur","flying","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/351.png","10","greninja","psychic","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/41.png","11","bulbasaur","bug","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/145.png","12","greninja","rock","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/184.png","13","bulbasaur","ghost","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/195.png","14","greninja","dragon","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/148.png","15","bulbasaur","dark","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/175.png","16","greninja","steel","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/110.png","17","bulbasaur","fairy","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1010.png","18","greninja","Vishal","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/121.png","19","bulbasaur","water","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/851.png","20","greninja","dark","poison"),
+            PokemonView("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/951.png","21","bulbasaur","poison","poison"),
         )
 
 //        var name = " "
@@ -109,61 +109,4 @@ class PokemonOverviewFragment : Fragment() {
 
         return binding.root
     }
-//
-//    private fun txtNumber(it: PokemonInfo?): String = when (it?.id.toString().length) {
-//        1 -> "#00${it?.id}"
-//        2 -> "#0${it?.id}"
-//        else -> "#${it?.id}"
-//    }
-//
-////    private fun txtType(
-////        it: PokemonInfo,
-////        binding: GridListItemPokemonBinding,
-////    ) {
-////
-////        View.GONE.also { binding.txtType1.visibility = it }
-////
-////        if(it.types.isNotEmpty()){
-////            View.VISIBLE.also { binding.txtType1.visibility = it }
-////            it.types[0].type.name.also { binding.txtType1.text = it }
-////        }
-////
-////        View.GONE.also { binding.txtType2.visibility = it }
-////
-////        if (it.types.size >= 2) {
-////            View.VISIBLE.also { binding.txtType2.visibility = it }
-////            it.types[1].type.name.also { binding.txtType2.text = it }
-////        }
-////    }
-//
-////    private fun txtNumber(
-////        binding: GridListItemPokemonBinding,
-////        it: PokemonInfo,
-////    ) =
-////        when (it.id.toString().length) {
-////            1 -> "#00${it.id}".also { binding.txtNumber.text = it }
-////            2 -> "#0${it.id}".also { binding.txtNumber.text = it }
-////            else -> "#${it.id}".also { binding.txtNumber.text = it }
-////        }
-//
-////    private fun loadImage(
-////        it: PokemonInfo,
-////        binding: GridListItemPokemonBinding,
-////    ) {
-////        val imgUrl = it.sprites.front_default
-////        if(imgUrl == null) View.GONE.also { binding.imgPokemon.visibility = it }
-////        else{
-////            val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
-////            Glide.with(this@PokemonOverviewFragment)
-////                .load(imgUri)
-////                .apply(
-////                    RequestOptions()
-////                        .placeholder(R.drawable.loading_animation)
-////                        .error(R.drawable.ic_broken_image)
-////                )
-////                .into(binding.imgPokemon)
-////        }
-//    }
-
-
 }

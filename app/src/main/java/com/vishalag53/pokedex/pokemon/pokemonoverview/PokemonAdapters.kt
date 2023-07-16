@@ -1,11 +1,14 @@
 package com.vishalag53.pokedex.pokemon.pokemonoverview
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -17,7 +20,7 @@ import com.vishalag53.pokedex.databinding.GridListItemPokemonBinding
 
 class PokemonAdapters(
     //var onClickListener: OnClickListener
-    val requiredContext: PokemonOverviewFragment,
+    private val requiredContext: PokemonOverviewFragment,
     var pokemonView: List<PokemonView>,
 ) : ListAdapter<PokemonView, PokemonAdapters.PokemonViewHolder>(DiffCallback) {
 
@@ -30,6 +33,7 @@ class PokemonAdapters(
         val name: TextView = binding.txtName
         val type1: TextView = binding.txtType1
         val type2: TextView = binding.txtType2
+        val gridListItemPokemon: ConstraintLayout = binding.gridListItemPokemon
 
         fun bind(pokemonView: PokemonView) {
             Log.d("VISHAL", "PokemonViewHolder")
@@ -68,11 +72,12 @@ class PokemonAdapters(
 //        holder.type1.text = pokemonList[position].type1
 //        holder.type2.text = pokemonList[position].type2
 
+        val context = holder.itemView.context
 
         loadImage(pokemonView[position], holder)
         txtNumber(pokemonView[position], holder)
         holder.name.text = pokemonView[position].name
-        txtType(pokemonView[position], holder)
+        txtType(pokemonView[position], holder, context)
 
         val pokemonView = getItem(position)
         holder.itemView.setOnClickListener() {
@@ -110,12 +115,23 @@ class PokemonAdapters(
     private fun txtType(
         it: PokemonView,
         holder: PokemonViewHolder,
+        context: Context,
     ) {
         View.GONE.also { holder.type1.visibility = it }
+
+
+
+        holder.gridListItemPokemon.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                R.color.TypeNormal
+            )
+        )
 
         if (it.type1?.length != 0) {
             View.VISIBLE.also { holder.type1.visibility = it }
             it.type1.also { holder.type1.text = it }
+            setBkgColor(it, holder, context)
         }
 
         View.GONE.also { holder.type2.visibility = it }
@@ -123,6 +139,140 @@ class PokemonAdapters(
         if (it.type2?.length != 0) {
             View.VISIBLE.also { holder.type2.visibility = it }
             it.type2.also { holder.type2.text = it }
+        }
+    }
+
+    private fun setBkgColor(
+        it: PokemonView,
+        holder: PokemonViewHolder,
+        context: Context,
+    ) {
+        when (it.type1.toString()) {
+            "fire" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeFire
+                )
+            )
+
+            "water" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeWater
+                )
+            )
+
+            "electric" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeElectric
+                )
+            )
+
+            "grass" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeGrass
+                )
+            )
+
+            "ice" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeIce
+                )
+            )
+
+            "fighting" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeFighting
+                )
+            )
+
+            "poison" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypePoison
+                )
+            )
+
+            "ground" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeGround
+                )
+            )
+
+            "flying" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeFlying
+                )
+            )
+
+            "psychic" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypePsychic
+                )
+            )
+
+            "bug" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeBug
+                )
+            )
+
+            "rock" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeRock
+                )
+            )
+
+            "ghost" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeGhost
+                )
+            )
+
+            "dragon" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeDragon
+                )
+            )
+
+            "dark" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeDark
+                )
+            )
+
+            "steel" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeSteel
+                )
+            )
+
+            "fairy" -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeFairy
+                )
+            )
+
+            else -> holder.gridListItemPokemon.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    R.color.TypeNormal
+                )
+            )
         }
     }
 
