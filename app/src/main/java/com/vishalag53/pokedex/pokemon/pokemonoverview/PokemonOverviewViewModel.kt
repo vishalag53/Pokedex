@@ -17,9 +17,14 @@ class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository)
     private val _name = MutableLiveData<String>()
     val name : LiveData<String>
         get() = _name
-    fun setVariable(data: String){
+    fun setName(data: String){
         _name.value = data
     }
+
+
+    private val _view = MutableLiveData<List<PokemonView>>()
+    val view : LiveData<List<PokemonView>>
+        get() = _view
 
     init {
         viewModelScope.launch (Dispatchers.IO) {
@@ -31,9 +36,9 @@ class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository)
      fun getInfo(){
 //        pokemonRepository.name = _name.value ?: ""
         viewModelScope.launch (Dispatchers.IO) {
-            Log.d("VISHAL","getInfo  ${_name.value}")
+            Log.d("VISHAL","getInfo  ${name.value}")
             var data = _name.value ?: ""
-            pokemonRepository.getPokemonInfo(data)
+            pokemonRepository.getPokemonInfo("greninja")
         }
     }
 
