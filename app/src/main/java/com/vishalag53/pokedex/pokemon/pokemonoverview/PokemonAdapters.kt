@@ -1,7 +1,6 @@
 package com.vishalag53.pokedex.pokemon.pokemonoverview
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +19,8 @@ import com.vishalag53.pokedex.databinding.GridListItemPokemonBinding
 
 class PokemonAdapters(
     //var onClickListener: OnClickListener
-    private val requiredContext: PokemonOverviewFragment,
-    var pokemonView: List<PokemonView>,
-) : ListAdapter<PokemonView, PokemonAdapters.PokemonViewHolder>(DiffCallback) {
+    private val requiredContext: PokemonOverviewFragment
+) : ListAdapter<PokemonListView, PokemonAdapters.PokemonViewHolder>(DiffCallback) {
 
 
     class PokemonViewHolder(private var binding: GridListItemPokemonBinding) :
@@ -36,50 +34,41 @@ class PokemonAdapters(
         val gridListItemPokemon: ConstraintLayout = binding.gridListItemPokemon
 
         fun bind(pokemonView: PokemonView) {
-            Log.d("VISHAL", "PokemonViewHolder")
             binding.pokemonView = pokemonView
             binding.executePendingBindings()
         }
     }
 
 
-    companion object DiffCallback : DiffUtil.ItemCallback<PokemonView>() {
-        override fun areItemsTheSame(oldItem: PokemonView, newItem: PokemonView): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<PokemonListView>() {
+        override fun areItemsTheSame(oldItem: PokemonListView, newItem: PokemonListView): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: PokemonView, newItem: PokemonView): Boolean {
-            return oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: PokemonListView, newItem: PokemonListView): Boolean {
+            return oldItem.pokemonView.id == newItem.pokemonView.id
         }
 
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-        Log.d("VISHAL", "Pokemon onCreateViewHolder")
-//        val view = LayoutInflater.from(parent.context).inflate(R.layout.grid_list_item_pokemon,parent,false)
-//        return PokemonViewHolder(view)
-        return PokemonViewHolder(GridListItemPokemonBinding.inflate(LayoutInflater.from(parent.context)))
+        return PokemonViewHolder(GridListItemPokemonBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
 
     override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        Log.d("VISHAL", "Pokemon onBindViewHolder")
-//        val imgUrl = pokemonList[position].img
-//        val imgUri = imgUrl?.toUri()?.buildUpon()?.scheme("https")?.build()
-//        holder.img.setImageURI(imgUri)
-//        holder.id.text = pokemonList[position].id
-//        holder.name.text = pokemonList[position].name
-//        holder.type1.text = pokemonList[position].type1
-//        holder.type2.text = pokemonList[position].type2
+        val pokemonListView = getItem(position)
+        val pokemonView = pokemonListView.pokemonView
 
         val context = holder.itemView.context
 
-        loadImage(pokemonView[position], holder)
-        txtNumber(pokemonView[position], holder)
-        holder.name.text = pokemonView[position].name
-        txtType(pokemonView[position], holder, context)
+        loadImage(pokemonView, holder)
+        txtNumber(pokemonView, holder)
+        holder.name.text = pokemonView.name
+        txtType(pokemonView, holder, context)
 
-        val pokemonView = getItem(position)
+
         holder.itemView.setOnClickListener() {
             // onClickListener.onClick(pokemonView)
         }
@@ -91,7 +80,7 @@ class PokemonAdapters(
         holder: PokemonViewHolder,
     ) {
         val imgUrl = it.img
-        if (imgUrl == null) View.GONE.also { holder.img.visibility = it }
+        if (imgUrl == null) holder.img.setImageResource(R.drawable.pokeball)
         else {
             val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
             Glide.with(requiredContext)
