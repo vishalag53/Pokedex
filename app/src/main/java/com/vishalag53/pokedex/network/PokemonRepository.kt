@@ -1,21 +1,21 @@
 package com.vishalag53.pokedex.network
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonView
 import com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonListView
-import com.vishalag53.pokedex.response.PokemonInfo
+import com.vishalag53.pokedex.pokemon.pokemonoverview.database.PokemonListDatabase
+import com.vishalag53.pokedex.pokemon.pokemonoverview.database.PokemonListDatabaseDao
+import com.vishalag53.pokedex.pokemon.pokemonoverview.database.PokemonListViewEntity
 import com.vishalag53.pokedex.response.PokemonList
 
 
-class PokemonRepository(private val pokemonApi: PokemonApi) {
+class PokemonRepository(
+    private val pokemonApi: PokemonApi,
+    private val pokemonListViewDatabaseDao: PokemonListDatabaseDao,
+) {
 
-    private val _pokemonListView = MutableLiveData<List<PokemonListView>>()
-    val pokemonListView: LiveData<List<PokemonListView>>
-        get() = _pokemonListView
-
-    suspend fun getPokemonListView(){
+    suspend fun getPokemonListView() {
         val pokemonListResponse = pokemonApi.getPokemonList()
         val pokemonList = pokemonListResponse.body()?.results ?: emptyList()
 
@@ -36,7 +36,26 @@ class PokemonRepository(private val pokemonApi: PokemonApi) {
                 pokemonListViewList.add(pokemonListView)
             }
         }
-        _pokemonListView.postValue(pokemonListViewList)
+
+        val pokemonListViewEntities = pokemonListViewList.map { pokemonListView ->
+            PokemonListViewEntity(
+                img = pokemonListView.pokemonView.img,
+                id = pokemonListView.pokemonView.id,
+                name = pokemonListView.pokemonView.name,
+                type1 = pokemonListView.pokemonView.type1,
+                type2 = pokemonListView.pokemonView.type2,
+            )
+        }
+
+
+        val existingData = pokemonListViewDatabaseDao.getAllPokemonListViews()
+        val newData = pokemonListViewEntities.filterNot { existingData.contains(it) }
+        pokemonListViewDatabaseDao.insertAll(newData)
+
+    }
+
+    suspend fun getAllPokemonListFromDB() : List<PokemonListViewEntity>{
+        return pokemonListViewDatabaseDao.getAllPokemonListViews()
     }
 
 
@@ -44,26 +63,5 @@ class PokemonRepository(private val pokemonApi: PokemonApi) {
 
     val pokemonLiveData : LiveData<PokemonList>
     get() = _pokemonLiveData
-
-    private val _pokemonInfo = MutableLiveData<PokemonInfo>()
-
-    val pokemonInfo: LiveData<PokemonInfo>
-        get() = _pokemonInfo
-
-
-    suspend fun getPokemon(){
-        val resultPokemonList = pokemonApi.getPokemonList()
-        if(resultPokemonList.body() != null){
-            _pokemonLiveData.postValue(resultPokemonList.body())
-        }
-    }
-
-
-    suspend fun getPokemonInfo(name:String){
-        val resultPokemonInfo = pokemonApi.getPokemonInfo(name)
-        if(resultPokemonInfo.body() != null){
-            _pokemonInfo.postValue(resultPokemonInfo.body())
-        }
-    }
 
 }

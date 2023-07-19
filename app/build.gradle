@@ -95,4 +95,10 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 
+    implementation "androidx.room:room-runtime:$version_room_database"
+    kapt "androidx.room:room-compiler:$version_room_database"
+
+    implementation "androidx.room:room-common:$version_room_database"
+    implementation "androidx.room:room-ktx:$version_room_database"
+
 }
