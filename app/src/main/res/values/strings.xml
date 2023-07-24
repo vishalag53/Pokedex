@@ -21,4 +21,29 @@
     <string name="favorite">Favorite</string>
     <string name="share">Share</string>
     <string name="pokemon">Pokemon</string>
+    <string name="share_favourite_pokemon">My Favourite Pokemon is %1$s.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pokemon_image">Pokemon Image</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
+    <string name="noDataPresent">There is no data present.</string>
+    <string name="icon">Icon</string>
+    <string name="base_happiness">Base happiness</string>
+    <string name="capture_rate">Capture Rate</string>
+    <string name="color">Color</string>
+    <string name="egg_groups">Egg Groups</string>
+    <string name="growth_rates">Growth Rates</string>
+    <string name="hatch_counter">Hatch Counter</string>
+    <string name="shape">Shape</string>
+    <string name="base_stats">Base Stats</string>
+    <string name="hp">HP</string>
+    <string name="attack">Attack</string>
+    <string name="defense">Defense</string>
+    <string name="special_attack">Special-Attack</string>
+    <string name="special_defense">Special-Defense</string>
+    <string name="speed">Speed</string>
+    <string name="total">Total</string>
+    <string name="pokemon_icon">Pokemon Icon</string>
 </resources>

@@ -1,26 +1,21 @@
 package com.vishalag53.pokedex.pokemon.pokemonoverview
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
+import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
 import com.vishalag53.pokedex.network.PokemonRepository
-import com.vishalag53.pokedex.pokemon.pokemonoverview.database.PokemonListDatabaseDao
-import com.vishalag53.pokedex.pokemon.pokemonoverview.database.PokemonListViewEntity
-import com.vishalag53.pokedex.response.PokemonList
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
 class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository) : ViewModel() {
 
-    private val _view = MutableLiveData<List<PokemonView>>()
-    val view : LiveData<List<PokemonView>>
-        get() = _view
-
-    val allPokemonListViews : LiveData<List<PokemonListViewEntity>> = liveData {
-        val pokemonListViews = pokemonRepository.getAllPokemonListFromDB()
+    val allPokemonListViews : LiveData<List<PokemonEntity>> = liveData {
+        val pokemonListViews = pokemonRepository.getAllPokemonListViewFromDB()
         emit(pokemonListViews)
     }
 
@@ -28,11 +23,22 @@ class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository)
     init {
         viewModelScope.launch (Dispatchers.IO) {
             //pokemonRepository.getPokemonListView()
+            //pokemonRepository.deleteAll()
         }
     }
 
+    private val _navigateToSelectedProperty = MutableLiveData<PokemonEntity>()
+    val navigateToSelectedProperty: LiveData<PokemonEntity>
+        get() = _navigateToSelectedProperty
 
-    val pokemon: LiveData<PokemonList>
-        get() = pokemonRepository.pokemonLiveData
+
+    fun displayPropertyDetails(pokemonList: PokemonEntity){
+        _navigateToSelectedProperty.value = pokemonList
+    }
+
+    @SuppressLint("NullSafeMutableLiveData")
+    fun displayPropertyDetailsComplete(){
+        _navigateToSelectedProperty.value = null
+    }
 
 }

@@ -1,67 +1,99 @@
 package com.vishalag53.pokedex.network
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonView
-import com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonListView
-import com.vishalag53.pokedex.pokemon.pokemonoverview.database.PokemonListDatabase
-import com.vishalag53.pokedex.pokemon.pokemonoverview.database.PokemonListDatabaseDao
-import com.vishalag53.pokedex.pokemon.pokemonoverview.database.PokemonListViewEntity
-import com.vishalag53.pokedex.response.PokemonList
+import com.vishalag53.pokedex.database.pokemonDatabase.PokemonDatabaseDao
+import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
+import com.vishalag53.pokedex.response.EvolvesTo
+import com.vishalag53.pokedex.getId
+import com.vishalag53.pokedex.getBkgColor
+import com.vishalag53.pokedex.getEggGroups
+import com.vishalag53.pokedex.getTotal
 
 
 class PokemonRepository(
     private val pokemonApi: PokemonApi,
-    private val pokemonListViewDatabaseDao: PokemonListDatabaseDao,
+    private val pokemonDatabaseDao: PokemonDatabaseDao
 ) {
 
     suspend fun getPokemonListView() {
         val pokemonListResponse = pokemonApi.getPokemonList()
         val pokemonList = pokemonListResponse.body()?.results ?: emptyList()
 
-        val pokemonListViewList = mutableListOf<PokemonListView>()
+        val pokemonEntity = mutableListOf<PokemonEntity>()
 
         for (pokemon in pokemonList) {
+
             val pokemonInfoResponse = pokemonApi.getPokemonInfo(pokemon.name)
             val pokemonInfo = pokemonInfoResponse.body()
-            if (pokemonInfo != null) {
-                val pokemonView = PokemonView(
-                    pokemonInfo.sprites.front_default,
-                    pokemonInfo.id.toString(),
-                    pokemonInfo.name,
-                    pokemonInfo.types.getOrNull(0)?.type?.name,
-                    pokemonInfo.types.getOrNull(1)?.type?.name
+
+            val  pokemonId = pokemonInfo!!.id
+
+            val pokemonSpeciesResponse = pokemonApi.getPokemonSpeciesInfo(pokemonId)
+            val pokemonSpecies = pokemonSpeciesResponse.body()
+
+//            val pokemonEvolutionChainId = pokemonSpecies?.evolution_chain?.url?.let { getPokemonEvolutionChainId(it) }
+
+//            val pokemonEvolutionChainResponse = pokemonEvolutionChainId?.let { pokemonApi.getPokemonEvolutionChain(it) }
+//            val pokemonEvolutionChain = pokemonEvolutionChainResponse?.body()
+
+            if (pokemonInfo != null && pokemonSpecies != null ) {
+                val pokemonEntityList = PokemonEntity(
+                    front_default = pokemonInfo.sprites.front_default,
+                    id = getId(pokemonInfo.id.toString()),
+                    name = pokemonInfo.name,
+                    type1 = pokemonInfo.types.getOrNull(0)?.type?.name,
+                    type2 = pokemonInfo.types.getOrNull(1)?.type?.name,
+                    height = pokemonInfo.height.toString(),
+                    weight = pokemonInfo.weight.toString(),
+                    hp = pokemonInfo.stats.getOrNull(0)?.base_stat.toString(),
+                    attack = pokemonInfo.stats.getOrNull(1)?.base_stat.toString(),
+                    defense = pokemonInfo.stats.getOrNull(2)?.base_stat.toString(),
+                    special_attack = pokemonInfo.stats.getOrNull(3)?.base_stat.toString(),
+                    special_defense = pokemonInfo.stats.getOrNull(4)?.base_stat.toString(),
+                    speed = pokemonInfo.stats.getOrNull(5)?.base_stat.toString(),
+                    color = getBkgColor(pokemonInfo.types.getOrNull(0)?.type?.name),
+                    total = getTotal(pokemonInfo),
+                    front_shinny = pokemonInfo.sprites.front_shiny,
+                    base_happiness = pokemonSpecies.base_happiness.toString(),
+                    capture_rate = pokemonSpecies.capture_rate.toString(),
+                    pokemon_color = pokemonSpecies.color.name,
+                    egg_groups = getEggGroups(pokemonSpecies.egg_groups),
+                    growth_rates = pokemonSpecies.growth_rate.name,
+                    hatch_count = pokemonSpecies.hatch_counter.toString(),
+                    shape = pokemonSpecies.shape?.name,
+                    //pokemon_evolution_min_level = getEvolutionChainMinLevels(pokemonEvolutionChain.chain.evolvesTo),
+                    //pokemon_evolution_pokemon_name = getEvolutionChainSpeciesName(pokemonEvolutionChain.chain),
+                    //move = pokemonInfo.moves,
+                    //move_name = getMoveName(pokemonInfo.moves, pokemonApi)
                 )
-                val pokemonListView = PokemonListView(pokemonView)
-                pokemonListViewList.add(pokemonListView)
+                pokemonEntity.add(pokemonEntityList)
             }
         }
 
-        val pokemonListViewEntities = pokemonListViewList.map { pokemonListView ->
-            PokemonListViewEntity(
-                img = pokemonListView.pokemonView.img,
-                id = pokemonListView.pokemonView.id,
-                name = pokemonListView.pokemonView.name,
-                type1 = pokemonListView.pokemonView.type1,
-                type2 = pokemonListView.pokemonView.type2,
-            )
+        pokemonDatabaseDao.insertAllDetail(pokemonEntity)
+    }
+
+    private fun getEvolutionChainMinLevels(pokemonEvolutionTo: List<EvolvesTo>): List<String> {
+        val minLevels = mutableListOf<String>()
+
+        for (i in pokemonEvolutionTo.indices) {
+            for (j in pokemonEvolutionTo[i].evolution_details) {
+                val minLevel = j.minLevel.toString()
+                minLevels.add(minLevel)
+            }
         }
-
-
-        val existingData = pokemonListViewDatabaseDao.getAllPokemonListViews()
-        val newData = pokemonListViewEntities.filterNot { existingData.contains(it) }
-        pokemonListViewDatabaseDao.insertAll(newData)
-
+        return minLevels
     }
 
-    suspend fun getAllPokemonListFromDB() : List<PokemonListViewEntity>{
-        return pokemonListViewDatabaseDao.getAllPokemonListViews()
+    suspend fun getAllPokemonListViewFromDB(): List<PokemonEntity> {
+        return pokemonDatabaseDao.getAllPokemonDetailListViews()
     }
 
+    suspend fun getOnePokemonDetail(name: String): PokemonEntity? {
+        return pokemonDatabaseDao.getOnePokemonDetailListView(name)
+    }
 
-    private val _pokemonLiveData = MutableLiveData<PokemonList>()
-
-    val pokemonLiveData : LiveData<PokemonList>
-    get() = _pokemonLiveData
+    suspend fun deleteAll() {
+        pokemonDatabaseDao.deleteAll()
+    }
 
 }

@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs'
     id 'kotlin-kapt'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -101,4 +102,5 @@ dependencies {
     implementation "androidx.room:room-common:$version_room_database"
     implementation "androidx.room:room-ktx:$version_room_database"
 
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$version_serialization"
 }

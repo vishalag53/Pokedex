@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.vishalag53.pokedex.databinding.FragmentHomeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 
 class HomeFragment : Fragment() {
@@ -30,6 +32,8 @@ class HomeFragment : Fragment() {
             false
         )
         val view = binding.root
+
+
 
         anim()
 
