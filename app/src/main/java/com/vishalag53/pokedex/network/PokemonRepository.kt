@@ -2,11 +2,10 @@ package com.vishalag53.pokedex.network
 
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonDatabaseDao
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
-import com.vishalag53.pokedex.response.EvolvesTo
-import com.vishalag53.pokedex.getId
-import com.vishalag53.pokedex.getBkgColor
-import com.vishalag53.pokedex.getEggGroups
-import com.vishalag53.pokedex.getTotal
+import com.vishalag53.pokedex.util.getId
+import com.vishalag53.pokedex.util.getBkgColor
+import com.vishalag53.pokedex.util.getEggGroups
+import com.vishalag53.pokedex.util.getTotal
 
 
 class PokemonRepository(
@@ -25,17 +24,12 @@ class PokemonRepository(
             val pokemonInfoResponse = pokemonApi.getPokemonInfo(pokemon.name)
             val pokemonInfo = pokemonInfoResponse.body()
 
-            val  pokemonId = pokemonInfo!!.id
+            val pokemonId = pokemonInfo!!.id
 
             val pokemonSpeciesResponse = pokemonApi.getPokemonSpeciesInfo(pokemonId)
             val pokemonSpecies = pokemonSpeciesResponse.body()
 
-//            val pokemonEvolutionChainId = pokemonSpecies?.evolution_chain?.url?.let { getPokemonEvolutionChainId(it) }
-
-//            val pokemonEvolutionChainResponse = pokemonEvolutionChainId?.let { pokemonApi.getPokemonEvolutionChain(it) }
-//            val pokemonEvolutionChain = pokemonEvolutionChainResponse?.body()
-
-            if (pokemonInfo != null && pokemonSpecies != null ) {
+            if (pokemonInfo != null && pokemonSpecies != null) {
                 val pokemonEntityList = PokemonEntity(
                     front_default = pokemonInfo.sprites.front_default,
                     id = getId(pokemonInfo.id.toString()),
@@ -60,28 +54,12 @@ class PokemonRepository(
                     growth_rates = pokemonSpecies.growth_rate.name,
                     hatch_count = pokemonSpecies.hatch_counter.toString(),
                     shape = pokemonSpecies.shape?.name,
-                    //pokemon_evolution_min_level = getEvolutionChainMinLevels(pokemonEvolutionChain.chain.evolvesTo),
-                    //pokemon_evolution_pokemon_name = getEvolutionChainSpeciesName(pokemonEvolutionChain.chain),
-                    //move = pokemonInfo.moves,
-                    //move_name = getMoveName(pokemonInfo.moves, pokemonApi)
                 )
                 pokemonEntity.add(pokemonEntityList)
             }
         }
 
-        pokemonDatabaseDao.insertAllDetail(pokemonEntity)
-    }
-
-    private fun getEvolutionChainMinLevels(pokemonEvolutionTo: List<EvolvesTo>): List<String> {
-        val minLevels = mutableListOf<String>()
-
-        for (i in pokemonEvolutionTo.indices) {
-            for (j in pokemonEvolutionTo[i].evolution_details) {
-                val minLevel = j.minLevel.toString()
-                minLevels.add(minLevel)
-            }
-        }
-        return minLevels
+        pokemonDatabaseDao.insertAllPokemon(pokemonEntity)
     }
 
     suspend fun getAllPokemonListViewFromDB(): List<PokemonEntity> {
@@ -92,8 +70,8 @@ class PokemonRepository(
         return pokemonDatabaseDao.getOnePokemonDetailListView(name)
     }
 
-    suspend fun deleteAll() {
-        pokemonDatabaseDao.deleteAll()
+    suspend fun deleteAllPokemon() {
+        pokemonDatabaseDao.deleteAllPokemon()
     }
 
 }

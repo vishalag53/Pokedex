@@ -1,4 +1,4 @@
-package com.vishalag53.pokedex
+package com.vishalag53.pokedex.util
 
 import androidx.room.TypeConverter
 

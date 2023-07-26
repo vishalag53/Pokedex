@@ -9,10 +9,10 @@ import androidx.room.Query
 interface PokemonDatabaseDao {
 
     @Insert(onConflict =  OnConflictStrategy.REPLACE)
-    suspend fun insert(pokemonListView: PokemonEntity)
+    suspend fun insertPokemon(pokemonListView: PokemonEntity)
 
     @Insert(onConflict =  OnConflictStrategy.REPLACE)
-    suspend fun insertAllDetail(pokemonListView: List<PokemonEntity>)
+    suspend fun insertAllPokemon(pokemonListView: List<PokemonEntity>)
 
     @Query("SELECT * FROM pokemon_list_view")
     suspend fun getAllPokemonDetailListViews(): List<PokemonEntity>
@@ -21,5 +21,5 @@ interface PokemonDatabaseDao {
     suspend fun getOnePokemonDetailListView(name : String): PokemonEntity?
 
     @Query("DELETE FROM pokemon_list_view")
-    suspend fun deleteAll()
+    suspend fun deleteAllPokemon()
 }

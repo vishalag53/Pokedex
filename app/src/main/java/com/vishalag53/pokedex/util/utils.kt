@@ -1,5 +1,6 @@
-package com.vishalag53.pokedex
+package com.vishalag53.pokedex.util
 
+import com.vishalag53.pokedex.R
 import com.vishalag53.pokedex.response.EggGroup
 import com.vishalag53.pokedex.response.PokemonInfo
 

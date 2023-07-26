@@ -22,8 +22,8 @@ class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository)
 
     init {
         viewModelScope.launch (Dispatchers.IO) {
-            //pokemonRepository.getPokemonListView()
-            //pokemonRepository.deleteAll()
+            pokemonRepository.getPokemonListView()
+            //pokemonRepository.deleteAllPokemon()
         }
     }
 

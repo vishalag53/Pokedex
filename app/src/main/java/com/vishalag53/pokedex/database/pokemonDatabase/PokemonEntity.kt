@@ -34,8 +34,4 @@ data class PokemonEntity(
     val growth_rates: String?,
     val hatch_count: String?,
     val shape: String?,
-    // val pokemon_evolution_min_level: List<String>,
-    // val pokemon_evolution_pokemon_name: List<String?>,
-    // val move: @RawValue List<Move>,
-    // val move_name :@RawValue List<Move_Detail>
-    ) : Parcelable
+) : Parcelable

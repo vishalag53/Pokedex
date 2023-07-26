@@ -46,4 +46,6 @@
     <string name="speed">Speed</string>
     <string name="total">Total</string>
     <string name="pokemon_icon">Pokemon Icon</string>
+    <string name="add_favorite_pokemon">Add Favorite Pokemon</string>
+    <string name="search">Search</string>
 </resources>
