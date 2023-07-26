@@ -37,43 +37,43 @@ class HomeFragment : Fragment() {
 
         anim()
 
-        binding.PokemonImgBtn.setOnClickListener { 
+        binding.pokemonCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokemonOverviewFragment())
         }
 
-        binding.pokedexImgBtn.setOnClickListener {
+        binding.pokedexCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokedexOverviewFragment())
         }
 
-        binding.abilityImgBtn.setOnClickListener {
+        binding.abilityCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToAbilityOverviewFragment())
         }
 
-        binding.generationImgBtn.setOnClickListener {
+        binding.generationCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToGenerationOverviewFragment())
         }
 
-        binding.moveImgBtn.setOnClickListener {
+        binding.moveCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToMoveOverviewFragment())
         }
 
-        binding.pokemonSpeciesImgBtn.setOnClickListener {
+        binding.pokemonSpeciesCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToPokemonSpeciesOverviewFragment())
         }
 
-        binding.regionImgBtn.setOnClickListener {
+        binding.regionsCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToRegionsOverviewFragment())
         }
 
-        binding.statImgBtn.setOnClickListener {
+        binding.statCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToStatOverviewFragment())
         }
 
-        binding.typeImgBtn.setOnClickListener {
+        binding.typeCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToTypeOverviewFragment())
         }
 
-        binding.favoriteImgBtn.setOnClickListener {
+        binding.favoriteCardView.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.navigateHomeFragmentToFavoriteOverviewFragment())
         }
 
@@ -97,16 +97,17 @@ class HomeFragment : Fragment() {
         val animRight = AnimationUtils.loadAnimation(binding.root.context, R.anim.from_right)
 
 
-        binding.generationImgBtn.animation = animLeft
-        binding.pokedexImgBtn.animation = animLeft
-        binding.regionImgBtn.animation = animLeft
-        binding.typeImgBtn.animation = animLeft
+        binding.pokemonCardView.animation = animLeft
+        binding.generationCardView.animation = animLeft
+        binding.pokedexCardView.animation = animLeft
+        binding.regionsCardView.animation = animLeft
+        binding.typeCardView.animation = animLeft
 
-        binding.abilityImgBtn.animation = animRight
-        binding.moveImgBtn.animation = animRight
-        binding.pokemonSpeciesImgBtn.animation = animRight
-        binding.statImgBtn.animation = animRight
-        binding.favoriteImgBtn.animation = animRight
+        binding.abilityCardView.animation = animRight
+        binding.moveCardView.animation = animRight
+        binding.pokemonSpeciesCardView.animation = animRight
+        binding.statCardView.animation = animRight
+        binding.favoriteCardView.animation = animRight
     }
 
 }

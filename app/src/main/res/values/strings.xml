@@ -48,4 +48,14 @@
     <string name="pokemon_icon">Pokemon Icon</string>
     <string name="add_favorite_pokemon">Add Favorite Pokemon</string>
     <string name="search">Search</string>
+    <string name="pokemonCap">POKEMON</string>
+    <string name="abilityCap">ABILITY</string>
+    <string name="generationCap">GENERATION</string>
+    <string name="moveCap">MOVE</string>
+    <string name="pokedexCap">POKEDEX</string>
+    <string name="speciesCap">SPECIES</string>
+    <string name="regionsCap">REGIONS</string>
+    <string name="statCap">STAT</string>
+    <string name="typeCap">TYPE</string>
+    <string name="favoriteCap">FAVORITE</string>
 </resources>
