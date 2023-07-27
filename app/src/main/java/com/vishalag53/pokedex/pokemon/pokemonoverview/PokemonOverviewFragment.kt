@@ -1,8 +1,6 @@
 package com.vishalag53.pokedex.pokemon.pokemonoverview
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.preference.PreferenceManager
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
@@ -11,7 +9,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.edit
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -28,7 +25,7 @@ import com.vishalag53.pokedex.network.PokemonApiUtilities
 import com.vishalag53.pokedex.network.PokemonRepository
 
 
-@Suppress("DEPRECATION")
+@Suppress( "DEPRECATION")
 class PokemonOverviewFragment : Fragment() {
 
     private lateinit var viewModel: PokemonOverviewViewModel
@@ -138,6 +135,9 @@ class PokemonOverviewFragment : Fragment() {
             ) == true
             matchesId || matchesName || matchesType1 || matchesType2
         }
+
+        val noPokemonFoundText = binding.noPokemonFoundText
+        noPokemonFoundText.visibility = if(filteredList.isEmpty()) View.VISIBLE else View.GONE
         adapters.submitList(filteredList)
     }
 

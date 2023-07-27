@@ -27,6 +27,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/noPokemonFoundText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/noPokemonFound"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@android:color/background_light"
+                android:visibility="gone"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -37,7 +47,8 @@
             android:layout_margin="16dp"
             android:layout_gravity="bottom|right"
             android:background="@drawable/rounded_bg"
-            app:queryHint="Search Pokemon" />
+            app:queryHint="Search Pokemon"
+            tools:ignore="RtlHardcoded" />
     </FrameLayout>
 
 </layout>
