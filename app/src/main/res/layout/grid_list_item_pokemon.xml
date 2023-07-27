@@ -29,6 +29,7 @@
                 android:layout_height="80dp"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
+                android:background="@drawable/circle_rounded_bg"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

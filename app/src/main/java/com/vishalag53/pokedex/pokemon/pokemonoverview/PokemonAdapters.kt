@@ -1,22 +1,33 @@
 package com.vishalag53.pokedex.pokemon.pokemonoverview
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.vishalag53.pokedex.R
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
 import com.vishalag53.pokedex.databinding.GridListItemPokemonBinding
+import com.vishalag53.pokedex.databinding.LinearListItemPokemonBinding
+
 
 class PokemonAdapters(
     private var onClickListener: OnClickListener
-) : ListAdapter<PokemonEntity, PokemonAdapters.PokemonViewHolder>(DiffCallback) {
+) : ListAdapter<PokemonEntity, RecyclerView.ViewHolder>(DiffCallback) {
 
+    enum class LayoutType{ GRID, LINEAR }
 
-    class PokemonViewHolder(private var binding: GridListItemPokemonBinding) :
+    private val VIEW_TYPE_GRID = 1
+    private val VIEW_TYPE_LINEAR = 2
+
+    var currentLayoutType = LayoutType.GRID
+
+    class GridPokemonViewHolder(private var binding: GridListItemPokemonBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         val gridListItemPokemon: ConstraintLayout = binding.gridListItemPokemon
@@ -26,6 +37,19 @@ class PokemonAdapters(
             binding.executePendingBindings()
         }
     }
+
+    class LinearPokemonViewHolder(private var binding: LinearListItemPokemonBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+        val linearListItemPokemon: ConstraintLayout = binding.linearListItemPokemon
+
+        fun bind(pokemonEntity: PokemonEntity) {
+            binding.pokemonEntity = pokemonEntity
+            binding.executePendingBindings()
+        }
+    }
+
+
 
 
     companion object DiffCallback : DiffUtil.ItemCallback<PokemonEntity>() {
@@ -40,34 +64,81 @@ class PokemonAdapters(
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonViewHolder {
-        return PokemonViewHolder(GridListItemPokemonBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-    }
-
-
-    override fun onBindViewHolder(holder: PokemonViewHolder, position: Int) {
-        val pokemonEntity = getItem(position)
-
-        val context = holder.itemView.context
-
-        setBkgColor(pokemonEntity.color,holder,context)
-
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(pokemonEntity)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when (viewType){
+            VIEW_TYPE_GRID -> {
+                val binding = GridListItemPokemonBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                GridPokemonViewHolder(binding)
+            }
+            VIEW_TYPE_LINEAR ->{
+                val binding = LinearListItemPokemonBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                )
+                LinearPokemonViewHolder(binding)
+            }
+            else -> throw IllegalArgumentException("Invalid view Type")
         }
-        holder.bind(pokemonEntity)
     }
 
-    private fun setBkgColor(color: Int, holder: PokemonViewHolder, context: Context) {
-        holder.gridListItemPokemon.setBackgroundColor(
-            ContextCompat.getColor(
-                context,
-                color
-            )
-        )
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val viewType = getItemViewType(position)
+        val pokemonEntity = getItem(position) as PokemonEntity
+        val context = holder.itemView.context
+        when (viewType){
+            VIEW_TYPE_GRID -> {
+                setBkgColor(pokemonEntity.color,holder,viewType,context)
+                holder.itemView.setOnClickListener {
+                    onClickListener.onClick(pokemonEntity)
+                }
+                (holder as GridPokemonViewHolder).bind(pokemonEntity)
+            }
+            VIEW_TYPE_LINEAR ->{
+                setBkgColor(pokemonEntity.color,holder,viewType,context)
+                holder.itemView.setOnClickListener{
+                    onClickListener.onClick(pokemonEntity)
+                }
+                (holder as LinearPokemonViewHolder).bind(pokemonEntity)
+            }
+        }
+
+
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (currentLayoutType == LayoutType.GRID) VIEW_TYPE_GRID else VIEW_TYPE_LINEAR
+    }
+
+    private fun setBkgColor(color: Int, holder: RecyclerView.ViewHolder, viewType: Int, context: Context) {
+        when (viewType){
+            VIEW_TYPE_GRID -> {
+                (holder as GridPokemonViewHolder).gridListItemPokemon.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        color
+                    )
+                )
+            }
+            VIEW_TYPE_LINEAR -> {
+                (holder as LinearPokemonViewHolder).linearListItemPokemon.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        color
+                    )
+                )
+            }
+        }
+
     }
 
     class OnClickListener(val clickListener : (pokemonEntity: PokemonEntity) -> Unit){
         fun onClick(pokemonEntity: PokemonEntity) = clickListener(pokemonEntity)
     }
+
 }

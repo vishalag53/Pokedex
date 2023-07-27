@@ -14,6 +14,10 @@ import kotlinx.coroutines.launch
 
 class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository) : ViewModel() {
 
+    private val _currentLayoutType = MutableLiveData<PokemonAdapters.LayoutType>()
+    val currentLayoutType: LiveData<PokemonAdapters.LayoutType>
+        get() = _currentLayoutType
+
     val allPokemonListViews : LiveData<List<PokemonEntity>> = liveData {
         val pokemonListViews = pokemonRepository.getAllPokemonListViewFromDB()
         emit(pokemonListViews)
@@ -21,6 +25,7 @@ class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository)
 
 
     init {
+        _currentLayoutType.value = PokemonAdapters.LayoutType.GRID
         viewModelScope.launch (Dispatchers.IO) {
             pokemonRepository.getPokemonListView()
             //pokemonRepository.deleteAllPokemon()
@@ -39,6 +44,10 @@ class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository)
     @SuppressLint("NullSafeMutableLiveData")
     fun displayPropertyDetailsComplete(){
         _navigateToSelectedProperty.value = null
+    }
+
+    fun setCurrentLayoutType(layoutType: PokemonAdapters.LayoutType){
+        _currentLayoutType.value = layoutType
     }
 
 }
