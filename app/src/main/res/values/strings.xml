@@ -59,4 +59,8 @@
     <string name="favoriteCap">FAVORITE</string>
     <string name="layout_change">Layout Change</string>
     <string name="noPokemonFound">No Pokemon Found... \n Try a different name, number or Type.</string>
+    <string name="noFavPresent">You did not mark any Pokemon as Favorite... \n Mark a Pokemon as favorite by tapping the love icon in the inside on Pokemon Detail</string>
+    <string name="change_in_list">Change in List</string>
+    <string name="change_in_grid">Change in Grid</string>
+    <string name="delete_all">Delete All</string>
 </resources>

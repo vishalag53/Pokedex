@@ -142,9 +142,19 @@
         tools:layout="@layout/fragment_type_overview" />
     <fragment
         android:id="@+id/favoriteOverviewFragment"
-        android:name="com.vishalag53.pokedex.favorite.favoriteoverview.FavoriteOverviewFragment"
+        android:name="com.vishalag53.pokedex.favorite.FavoriteOverviewFragment"
         android:label="@string/favorite"
-        tools:layout="@layout/fragment_favorite_overview" />
+        tools:layout="@layout/fragment_favorite_overview" >
+        <action
+            android:id="@+id/action_favoriteOverviewFragment_to_pokemonDetailFragment"
+            app:destination="@id/pokemonDetailFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/favoriteOverviewFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
     <fragment
         android:id="@+id/pokemonOverviewFragment"
         android:name="com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonOverviewFragment"

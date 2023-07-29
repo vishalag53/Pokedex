@@ -34,4 +34,5 @@ data class PokemonEntity(
     val growth_rates: String?,
     val hatch_count: String?,
     val shape: String?,
+    var isFav: Boolean
 ) : Parcelable

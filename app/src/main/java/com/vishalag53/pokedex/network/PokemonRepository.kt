@@ -1,5 +1,6 @@
 package com.vishalag53.pokedex.network
 
+import com.vishalag53.pokedex.database.favoriteDatabase.FavoriteDatabaseDao
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonDatabaseDao
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
 import com.vishalag53.pokedex.util.getId
@@ -10,9 +11,11 @@ import com.vishalag53.pokedex.util.getTotal
 
 class PokemonRepository(
     private val pokemonApi: PokemonApi,
-    private val pokemonDatabaseDao: PokemonDatabaseDao
+    private val pokemonDatabaseDao: PokemonDatabaseDao,
+    private val favoriteDatabaseDao: FavoriteDatabaseDao
 ) {
 
+    // Pokemon Database
     suspend fun getPokemonListView() {
         val pokemonListResponse = pokemonApi.getPokemonList()
         val pokemonList = pokemonListResponse.body()?.results ?: emptyList()
@@ -54,6 +57,7 @@ class PokemonRepository(
                     growth_rates = pokemonSpecies.growth_rate.name,
                     hatch_count = pokemonSpecies.hatch_counter.toString(),
                     shape = pokemonSpecies.shape?.name,
+                    isFav = false
                 )
                 pokemonEntity.add(pokemonEntityList)
             }
@@ -72,6 +76,28 @@ class PokemonRepository(
 
     suspend fun deleteAllPokemon() {
         pokemonDatabaseDao.deleteAllPokemon()
+    }
+
+    suspend fun updatePokemonFav(name: String,isFav: Boolean){
+        pokemonDatabaseDao.updatePokemonFav(name,isFav)
+    }
+
+    // Favorite Database
+
+    suspend fun addOnePokemonEntityInFav(pokemonEntity: PokemonEntity){
+        favoriteDatabaseDao.insertOneFavorite(pokemonEntity)
+    }
+
+    suspend fun deleteOnePokemonEntityInFav(name: String){
+        favoriteDatabaseDao.deleteOneFavorite(name)
+    }
+
+    suspend fun getAllFavoriteListFromDB(): List<PokemonEntity>{
+        return favoriteDatabaseDao.getAllFavorite()
+    }
+
+    suspend fun deleteAllFavorite() {
+        favoriteDatabaseDao.deleteAllFavorite()
     }
 
 }

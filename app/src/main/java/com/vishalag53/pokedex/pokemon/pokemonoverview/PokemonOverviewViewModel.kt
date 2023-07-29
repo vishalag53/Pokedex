@@ -27,7 +27,7 @@ class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository)
     init {
         _currentLayoutType.value = PokemonAdapters.LayoutType.GRID
         viewModelScope.launch (Dispatchers.IO) {
-            pokemonRepository.getPokemonListView()
+            //pokemonRepository.getPokemonListView()
             //pokemonRepository.deleteAllPokemon()
         }
     }
@@ -49,5 +49,6 @@ class PokemonOverviewViewModel(private val pokemonRepository: PokemonRepository)
     fun setCurrentLayoutType(layoutType: PokemonAdapters.LayoutType){
         _currentLayoutType.value = layoutType
     }
+
 
 }

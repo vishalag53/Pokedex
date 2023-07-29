@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.vishalag53.pokedex.MyApplication
 import com.vishalag53.pokedex.R
@@ -36,7 +38,7 @@ class PokemonDetailFragment : Fragment() {
 
         val pokemonApi = PokemonApiUtilities.getInstance().create(PokemonApi::class.java)
 
-        val pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon)
+        val pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon,application.daoDatabaseFavorite)
 
         val pokemonEntity =
             PokemonDetailFragmentArgs.fromBundle(requireArguments()).selectedProperty
@@ -47,6 +49,28 @@ class PokemonDetailFragment : Fragment() {
         )[PokemonDetailViewModel::class.java].also { viewModel = it }
 
         binding.viewModel = viewModel
+
+        // add or remove from favorite
+
+        viewModel.getFavoriteStatus(pokemonEntity.name)
+
+        binding.addFavoritePokemon.setOnClickListener{
+            if(viewModel.isFav.value == true){
+                viewModel.setFavouriteStatus(false,pokemonEntity)
+            }
+            else{
+                viewModel.setFavouriteStatus(true,pokemonEntity)
+            }
+        }
+
+        viewModel.isFav.observe(viewLifecycleOwner, Observer { isFav ->
+            if(isFav){
+                binding.addFavoritePokemon.setBackgroundResource(R.drawable.baseline_favorite_red_24)
+            }
+            else{
+                binding.addFavoritePokemon.setBackgroundResource(R.drawable.baseline_favorite_border_24)
+            }
+        })
 
         setHasOptionsMenu(true)
 

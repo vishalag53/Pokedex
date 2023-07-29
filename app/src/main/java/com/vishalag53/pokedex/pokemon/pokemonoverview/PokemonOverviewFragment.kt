@@ -34,6 +34,7 @@ class PokemonOverviewFragment : Fragment() {
     private lateinit var searchView: SearchView
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var binding: FragmentPokemonOverviewBinding
+    private lateinit var pokemonRepository: PokemonRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,13 +46,9 @@ class PokemonOverviewFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application as MyApplication
 
-        val dataSource = application.databasePokemon
-
         val pokemonApi = PokemonApiUtilities.getInstance().create(PokemonApi::class.java)
 
-
-        val pokemonRepository = PokemonRepository(pokemonApi, dataSource.pokemonDatabaseDao())
-
+        pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon,application.daoDatabaseFavorite)
 
         viewModel = ViewModelProvider(
             this,
@@ -112,6 +109,7 @@ class PokemonOverviewFragment : Fragment() {
             binding.pokemonGrid.layoutManager = layoutManager
         }
 
+
         setHasOptionsMenu(true)
 
         return binding.root
@@ -158,13 +156,13 @@ class PokemonOverviewFragment : Fragment() {
         when (item.itemId) {
             R.id.layoutChangeMenu -> {
                 val viewModel: PokemonOverviewViewModel by viewModels()
-                val currentLayoutType1 =
+                val currentLayoutType =
                     if (viewModel.currentLayoutType.value == PokemonAdapters.LayoutType.GRID) {
                         PokemonAdapters.LayoutType.LINEAR
                     } else {
                         PokemonAdapters.LayoutType.GRID
                     }
-                viewModel.setCurrentLayoutType(currentLayoutType1)
+                viewModel.setCurrentLayoutType(currentLayoutType)
 
                 item.setIcon(
                     if (adapters.currentLayoutType == PokemonAdapters.LayoutType.GRID) {
@@ -178,5 +176,6 @@ class PokemonOverviewFragment : Fragment() {
             else -> return super.onOptionsItemSelected(item)
         }
     }
+
 
 }

@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
 import com.vishalag53.pokedex.network.PokemonRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PokemonDetailViewModel(
     private val pokemonEntity: PokemonEntity,
@@ -33,5 +36,30 @@ class PokemonDetailViewModel(
         _navigateToSelectedProperty.value = null
     }
 
+    private val _isFav = MutableLiveData<Boolean>()
+    val isFav : LiveData<Boolean>
+        get() = _isFav
+
+    fun getFavoriteStatus(name: String){
+        viewModelScope.launch{
+            _isFav.value = pokemonRepository.getOnePokemonDetail(name)?.isFav
+        }
+    }
+
+    fun setFavouriteStatus(isFav: Boolean, pokemonEntity: PokemonEntity){
+        _isFav.value = isFav
+        if(isFav){
+            viewModelScope.launch {
+                pokemonRepository.addOnePokemonEntityInFav(pokemonEntity)
+                pokemonRepository.updatePokemonFav(pokemonEntity.name,isFav)
+            }
+        }
+        else{
+            viewModelScope.launch {
+                pokemonRepository.deleteOnePokemonEntityInFav(pokemonEntity.name)
+                pokemonRepository.updatePokemonFav(pokemonEntity.name,isFav)
+            }
+        }
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.vishalag53.pokedex.database.pokemonDatabase
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -22,4 +23,8 @@ interface PokemonDatabaseDao {
 
     @Query("DELETE FROM pokemon_list_view")
     suspend fun deleteAllPokemon()
+
+    @Query("UPDATE pokemon_list_view SET isFav = :fav WHERE name = :name")
+    suspend fun updatePokemonFav(name: String,fav : Boolean)
+
 }

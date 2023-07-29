@@ -6,7 +6,7 @@ import androidx.room.TypeConverters
 import com.vishalag53.pokedex.util.TypeConverter
 
 
-@Database(entities = [PokemonEntity::class], version = 5, exportSchema = false)
+@Database(entities = [PokemonEntity::class], version = 6, exportSchema = false)
 @TypeConverters(TypeConverter::class)
 abstract class PokemonDatabase : RoomDatabase(){
     abstract fun pokemonDatabaseDao() : PokemonDatabaseDao
