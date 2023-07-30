@@ -22,7 +22,7 @@ import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
 import com.vishalag53.pokedex.databinding.FragmentPokemonOverviewBinding
 import com.vishalag53.pokedex.network.PokemonApi
 import com.vishalag53.pokedex.network.PokemonApiUtilities
-import com.vishalag53.pokedex.network.PokemonRepository
+import com.vishalag53.pokedex.repository.PokemonRepository
 
 
 @Suppress( "DEPRECATION")
@@ -48,7 +48,7 @@ class PokemonOverviewFragment : Fragment() {
 
         val pokemonApi = PokemonApiUtilities.getInstance().create(PokemonApi::class.java)
 
-        pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon,application.daoDatabaseFavorite)
+        pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon)
 
         viewModel = ViewModelProvider(
             this,

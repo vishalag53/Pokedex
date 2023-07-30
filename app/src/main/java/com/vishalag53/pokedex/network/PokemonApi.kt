@@ -1,5 +1,7 @@
 package com.vishalag53.pokedex.network
 
+import com.vishalag53.pokedex.response.AbilityInfo
+import com.vishalag53.pokedex.response.AbilityList
 import com.vishalag53.pokedex.response.PokemonEvolutionChain
 import com.vishalag53.pokedex.response.PokemonInfo
 import com.vishalag53.pokedex.response.PokemonList
@@ -37,5 +39,14 @@ interface PokemonApi {
     suspend fun getPokemonMove(
         @Path("name") name: String
     ): Response<PokemonMove>
+
+
+    @GET("ability?offset=0&limit=358")
+    suspend fun getAbilityList() : Response<AbilityList>
+
+    @GET("ability/{name}")
+    suspend fun getAbilityInfo(
+        @Path("name") name: String
+    ): Response<AbilityInfo>
 
 }

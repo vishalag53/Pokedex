@@ -1,8 +1,8 @@
-package com.vishalag53.pokedex.network
+package com.vishalag53.pokedex.repository
 
-import com.vishalag53.pokedex.database.favoriteDatabase.FavoriteDatabaseDao
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonDatabaseDao
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
+import com.vishalag53.pokedex.network.PokemonApi
 import com.vishalag53.pokedex.util.getId
 import com.vishalag53.pokedex.util.getBkgColor
 import com.vishalag53.pokedex.util.getEggGroups
@@ -11,11 +11,11 @@ import com.vishalag53.pokedex.util.getTotal
 
 class PokemonRepository(
     private val pokemonApi: PokemonApi,
-    private val pokemonDatabaseDao: PokemonDatabaseDao,
-    private val favoriteDatabaseDao: FavoriteDatabaseDao
+    private val pokemonDatabaseDao: PokemonDatabaseDao
 ) {
 
     // Pokemon Database
+
     suspend fun getPokemonListView() {
         val pokemonListResponse = pokemonApi.getPokemonList()
         val pokemonList = pokemonListResponse.body()?.results ?: emptyList()
@@ -80,24 +80,6 @@ class PokemonRepository(
 
     suspend fun updatePokemonFav(name: String,isFav: Boolean){
         pokemonDatabaseDao.updatePokemonFav(name,isFav)
-    }
-
-    // Favorite Database
-
-    suspend fun addOnePokemonEntityInFav(pokemonEntity: PokemonEntity){
-        favoriteDatabaseDao.insertOneFavorite(pokemonEntity)
-    }
-
-    suspend fun deleteOnePokemonEntityInFav(name: String){
-        favoriteDatabaseDao.deleteOneFavorite(name)
-    }
-
-    suspend fun getAllFavoriteListFromDB(): List<PokemonEntity>{
-        return favoriteDatabaseDao.getAllFavorite()
-    }
-
-    suspend fun deleteAllFavorite() {
-        favoriteDatabaseDao.deleteAllFavorite()
     }
 
 }

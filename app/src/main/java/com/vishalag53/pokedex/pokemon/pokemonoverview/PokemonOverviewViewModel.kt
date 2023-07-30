@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
-import com.vishalag53.pokedex.network.PokemonRepository
+import com.vishalag53.pokedex.repository.PokemonRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

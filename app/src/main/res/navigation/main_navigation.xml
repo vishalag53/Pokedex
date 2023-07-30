@@ -109,7 +109,17 @@
         android:id="@+id/abilityOverviewFragment"
         android:name="com.vishalag53.pokedex.ability.abilityoverview.AbilityOverviewFragment"
         android:label="@string/ability"
-        tools:layout="@layout/fragment_ability_overview" />
+        tools:layout="@layout/fragment_ability_overview" >
+        <action
+            android:id="@+id/action_abilityOverviewFragment_to_abilityDetailFragment"
+            app:destination="@id/abilityDetailFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/abilityOverviewFragment"
+            app:popUpToInclusive="false"/>
+    </fragment>
     <fragment
         android:id="@+id/generationOverviewFragment"
         android:name="com.vishalag53.pokedex.generation.generationoverview.GenerationOverviewFragment"
@@ -177,7 +187,16 @@
         android:label="Pokemon Detail"
         tools:layout="@layout/fragment_pokemon_detail">
         <argument
-            android:name="selectedProperty"
+            android:name="selectedPropertyPokemon"
             app:argType="com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity" />
+    </fragment>
+    <fragment
+        android:id="@+id/abilityDetailFragment"
+        android:name="com.vishalag53.pokedex.ability.abilitydetail.AbilityDetailFragment"
+        android:label="fragment_ability_detail"
+        tools:layout="@layout/fragment_ability_detail">
+        <argument
+            android:name="selectedPropertyAbility"
+            app:argType="com.vishalag53.pokedex.database.abilityDatabase.AbilityEntity"/>
     </fragment>
 </navigation>

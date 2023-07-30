@@ -21,10 +21,8 @@ import com.vishalag53.pokedex.R
 import com.vishalag53.pokedex.databinding.FragmentFavoriteOverviewBinding
 import com.vishalag53.pokedex.network.PokemonApi
 import com.vishalag53.pokedex.network.PokemonApiUtilities
-import com.vishalag53.pokedex.network.PokemonRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.vishalag53.pokedex.repository.FavoriteRepository
+import com.vishalag53.pokedex.repository.PokemonRepository
 
 
 @Suppress("DEPRECATION")
@@ -34,6 +32,7 @@ class FavoriteOverviewFragment : Fragment() {
     private lateinit var viewModel: FavoriteOverviewViewModel
     private lateinit var adapters: FavoriteAdapters
     private lateinit var layoutManager: RecyclerView.LayoutManager
+    private lateinit var favoriteRepository: FavoriteRepository
     private lateinit var pokemonRepository: PokemonRepository
 
 
@@ -48,14 +47,16 @@ class FavoriteOverviewFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application as MyApplication
         val pokemonApi = PokemonApiUtilities.getInstance().create(PokemonApi::class.java)
-        pokemonRepository = PokemonRepository(
+        favoriteRepository = FavoriteRepository(
             pokemonApi,
-            application.daoDatabasePokemon,
-            application.daoDatabaseFavorite
+            application.daoDatabaseFavorite,
         )
+
+        pokemonRepository = PokemonRepository(pokemonApi,application.daoDatabasePokemon)
+
         viewModel = ViewModelProvider(
             this,
-            FavoriteOverviewViewModelFactory(pokemonRepository,application.daoDatabaseFavorite)
+            FavoriteOverviewViewModelFactory(pokemonRepository,favoriteRepository,application.daoDatabaseFavorite)
         )[FavoriteOverviewViewModel::class.java]
 
         adapters = FavoriteAdapters(FavoriteAdapters.OnClickListener {

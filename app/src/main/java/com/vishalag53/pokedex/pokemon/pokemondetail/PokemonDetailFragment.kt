@@ -18,7 +18,8 @@ import com.vishalag53.pokedex.R
 import com.vishalag53.pokedex.databinding.FragmentPokemonDetailBinding
 import com.vishalag53.pokedex.network.PokemonApi
 import com.vishalag53.pokedex.network.PokemonApiUtilities
-import com.vishalag53.pokedex.network.PokemonRepository
+import com.vishalag53.pokedex.repository.FavoriteRepository
+import com.vishalag53.pokedex.repository.PokemonRepository
 
 @Suppress("DEPRECATION")
 class PokemonDetailFragment : Fragment() {
@@ -38,14 +39,15 @@ class PokemonDetailFragment : Fragment() {
 
         val pokemonApi = PokemonApiUtilities.getInstance().create(PokemonApi::class.java)
 
-        val pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon,application.daoDatabaseFavorite)
+        val pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon)
+        val favoriteRepository = FavoriteRepository(pokemonApi, application.daoDatabaseFavorite)
 
         val pokemonEntity =
-            PokemonDetailFragmentArgs.fromBundle(requireArguments()).selectedProperty
+            PokemonDetailFragmentArgs.fromBundle(requireArguments()).selectedPropertyPokemon
 
         ViewModelProvider(
             this,
-            PokemonDetailViewModelFactory(pokemonEntity, pokemonRepository)
+            PokemonDetailViewModelFactory(pokemonEntity, pokemonRepository, favoriteRepository)
         )[PokemonDetailViewModel::class.java].also { viewModel = it }
 
         binding.viewModel = viewModel
@@ -81,7 +83,7 @@ class PokemonDetailFragment : Fragment() {
         val args = PokemonDetailFragmentArgs.fromBundle(requireArguments())
 
         return ShareCompat.IntentBuilder.from(requireActivity())
-            .setText(getString(R.string.share_favourite_pokemon, args.selectedProperty.name))
+            .setText(getString(R.string.share_favourite_pokemon, args.selectedPropertyPokemon.name))
             .setType("text/plain")
             .intent
     }

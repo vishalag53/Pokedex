@@ -8,11 +8,13 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.vishalag53.pokedex.database.favoriteDatabase.FavoriteDatabaseDao
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
-import com.vishalag53.pokedex.network.PokemonRepository
+import com.vishalag53.pokedex.repository.FavoriteRepository
+import com.vishalag53.pokedex.repository.PokemonRepository
 import kotlinx.coroutines.launch
 
 class FavoriteOverviewViewModel(
     private val pokemonRepository: PokemonRepository,
+    private val favoriteRepository: FavoriteRepository,
     private val daoDatabaseFavorite: FavoriteDatabaseDao
 ) : ViewModel() {
     private val _currentLayoutType = MutableLiveData<FavoriteAdapters.LayoutType>()
@@ -20,7 +22,7 @@ class FavoriteOverviewViewModel(
         get() = _currentLayoutType
 
     val allFavoritePokemonListViews : LiveData<List<PokemonEntity>> = liveData {
-        val favoritePokemonListViews = pokemonRepository.getAllFavoriteListFromDB()
+        val favoritePokemonListViews = favoriteRepository.getAllFavoriteListFromDB()
         emit(favoritePokemonListViews)
     }
 
@@ -59,10 +61,10 @@ class FavoriteOverviewViewModel(
 
     fun deleteAllFavorites(){
         viewModelScope.launch {
-            pokemonRepository.getAllFavoriteListFromDB().forEach {
+            favoriteRepository.getAllFavoriteListFromDB().forEach {
                 pokemonRepository.updatePokemonFav(it.name,false)
             }
-            pokemonRepository.deleteAllFavorite()
+            favoriteRepository.deleteAllFavorite()
             _favoriteList.postValue(emptyList())
         }
     }

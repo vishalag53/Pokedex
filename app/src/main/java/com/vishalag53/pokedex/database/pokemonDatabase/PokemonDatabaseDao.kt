@@ -1,6 +1,5 @@
 package com.vishalag53.pokedex.database.pokemonDatabase
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy

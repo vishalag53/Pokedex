@@ -6,13 +6,15 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
-import com.vishalag53.pokedex.network.PokemonRepository
-import kotlinx.coroutines.Dispatchers
+import com.vishalag53.pokedex.repository.FavoriteRepository
+import com.vishalag53.pokedex.repository.PokemonRepository
 import kotlinx.coroutines.launch
 
 class PokemonDetailViewModel(
     private val pokemonEntity: PokemonEntity,
-    private val pokemonRepository: PokemonRepository): ViewModel() {
+    private val pokemonRepository: PokemonRepository,
+    private val favoriteRepository: FavoriteRepository
+): ViewModel() {
 
     private val _selectedProperty = MutableLiveData<PokemonEntity>()
     val selectedProperty: LiveData<PokemonEntity>
@@ -50,13 +52,13 @@ class PokemonDetailViewModel(
         _isFav.value = isFav
         if(isFav){
             viewModelScope.launch {
-                pokemonRepository.addOnePokemonEntityInFav(pokemonEntity)
+                favoriteRepository.addOnePokemonEntityInFav(pokemonEntity)
                 pokemonRepository.updatePokemonFav(pokemonEntity.name,isFav)
             }
         }
         else{
             viewModelScope.launch {
-                pokemonRepository.deleteOnePokemonEntityInFav(pokemonEntity.name)
+                favoriteRepository.deleteOnePokemonEntityInFav(pokemonEntity.name)
                 pokemonRepository.updatePokemonFav(pokemonEntity.name,isFav)
             }
         }

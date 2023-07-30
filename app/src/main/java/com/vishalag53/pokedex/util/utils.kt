@@ -1,8 +1,10 @@
 package com.vishalag53.pokedex.util
 
 import com.vishalag53.pokedex.R
+import com.vishalag53.pokedex.response.EffectEntryXX
 import com.vishalag53.pokedex.response.EggGroup
 import com.vishalag53.pokedex.response.PokemonInfo
+import com.vishalag53.pokedex.response.PokemonX
 
 
 fun getId(id: String): String = when (id.length) {
@@ -48,6 +50,48 @@ fun getEggGroups(eggGroups: List<EggGroup>) : List<String>{
     }
 
     return eggGroupsList
+}
+
+fun getInDepthEffectFromAbility(effectEntries: List<EffectEntryXX>): String{
+    var inDepthEffect: String = ""
+
+    for(effect in effectEntries){
+        if(effect.language.name == "en"){
+            inDepthEffect = effect.effect
+        }
+    }
+    return inDepthEffect
+}
+
+fun getEffectFromAbility(effectEntries: List<EffectEntryXX>): String{
+    var effect: String = ""
+
+    for (effect1 in effectEntries){
+        if(effect1.language.name == "en"){
+            effect = effect1.short_effect
+        }
+    }
+    return effect
+}
+
+fun getPokemonNameListFromAbility(pokemonList: List<PokemonX>) : List<String>{
+    val pokemonNameList = mutableListOf<String>()
+
+    for(pokemon in pokemonList){
+        var id: Int = getIdFromUrl(pokemon.pokemon.url)
+
+        if(id in 1..1010){
+            pokemonNameList.add(pokemon.pokemon.name)
+        }
+    }
+
+    return pokemonNameList
+}
+
+fun getIdFromUrl(url: String): Int{
+    val s =  url.split("/")
+    val size = s.size
+    return s[size-2].toInt()
 }
 
 //fun getPokemonEvolutionChainId(evolutionChainUrl: String): String {

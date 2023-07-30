@@ -1,7 +1,7 @@
 package com.vishalag53.pokedex.response
 
-data class Ability(
-    val ability: AbilityX,
+data class PokemonX(
     val is_hidden: Boolean,
+    val pokemon: PokemonXX,
     val slot: Int
 )

@@ -5,11 +5,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vishalag53.pokedex.R
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
 import com.vishalag53.pokedex.databinding.GridListItemPokemonBinding
 import com.vishalag53.pokedex.databinding.LinearListItemPokemonBinding
