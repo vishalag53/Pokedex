@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.vishalag53.pokedex.pokemon.pokemondetail.PokemonDetailViewModel" />
+            type="com.vishalag53.pokedex.pokedex.pokedexdetail.PokedexDetailViewModel" />
     </data>
 
     <FrameLayout
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black"
-            tools:context=".pokemon.pokemondetail.PokemonDetailFragment">
+            tools:context=".pokedex.pokedexdetail.PokedexDetailFragment">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout"
@@ -103,7 +103,7 @@
                             android:layout_height="0dp"
                             android:layout_marginStart="32dp"
                             android:contentDescription="@string/pokemon_image"
-                            app:imageUrl="@{viewModel.selectedProperty.front_shinny}"
+                            app:imageUrl="@{viewModel.selectedProperty.frontShinny}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintHorizontal_bias="0.0"
@@ -227,7 +227,7 @@
                             android:layout_marginEnd="16dp"
                             android:contentDescription="@string/pokemon_icon"
                             android:scaleType="fitCenter"
-                            app:imageUrl="@{viewModel.selectedProperty.front_shinny}"
+                            app:imageUrl="@{viewModel.selectedProperty.frontShinny}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
@@ -240,7 +240,7 @@
                             android:layout_marginEnd="16dp"
                             android:contentDescription="@string/pokemon_icon"
                             android:scaleType="fitCenter"
-                            app:imageUrl="@{viewModel.selectedProperty.front_default}"
+                            app:imageUrl="@{viewModel.selectedProperty.frontDefault}"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/icon1"
                             app:layout_constraintTop_toTopOf="parent"
@@ -287,7 +287,7 @@
                             android:id="@+id/txtBaseHappiness"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:textIfNull="@{viewModel.selectedProperty.base_happiness}"
+                            app:textIfNull="@{viewModel.selectedProperty.baseHappiness}"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtViewBaseHappiness"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -310,7 +310,7 @@
                             android:id="@+id/txtCaptureRate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:textIfNull="@{viewModel.selectedProperty.capture_rate}"
+                            app:textIfNull="@{viewModel.selectedProperty.captureRate}"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtViewCaptureRate"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -333,7 +333,7 @@
                             android:id="@+id/txtColor"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:textIfNull="@{viewModel.selectedProperty.pokemon_color}"
+                            app:textIfNull="@{viewModel.selectedProperty.pokemonColor}"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtViewColor"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -356,7 +356,7 @@
                             android:id="@+id/txtEggGroups"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:textIfNull="@{viewModel.selectedProperty.egg_groups[0]}"
+                            app:textIfNull="@{viewModel.selectedProperty.eggGroups}"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtViewEggGroups"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -379,7 +379,7 @@
                             android:id="@+id/txtGrowthRates"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:textIfNull="@{viewModel.selectedProperty.growth_rates}"
+                            app:textIfNull="@{viewModel.selectedProperty.growthRates}"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtViewGrowthRate"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -402,7 +402,7 @@
                             android:id="@+id/txtHatchCounter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            app:textIfNull="@{viewModel.selectedProperty.hatch_count}"
+                            app:textIfNull="@{viewModel.selectedProperty.hatchCount}"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtViewHatchCounter"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -555,7 +555,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            app:textIfNull="@{viewModel.selectedProperty.special_attack}"
+                            app:textIfNull="@{viewModel.selectedProperty.specialAttack}"
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtViewSpecialAttack"
@@ -579,7 +579,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
-                            app:textIfNull="@{viewModel.selectedProperty.special_defense}"
+                            app:textIfNull="@{viewModel.selectedProperty.specialDefense}"
                             android:textColor="@color/black"
                             android:textSize="16sp"
                             app:layout_constraintBottom_toBottomOf="@+id/txtViewSpecialDefense"

@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -46,15 +48,27 @@ class AbilityOverviewFragment : Fragment() {
             AbilityOverviewViewModelFactory(abilityRepository)
         )[AbilityOverviewViewModel::class.java]
 
+        abilityListEntities = viewModel.getAllAbilities()
+
+        if(abilityListEntities.isEmpty()){
+            viewModel.setVisibility(View.GONE)
+        }
+        else{
+            viewModel.setVisibility(View.VISIBLE)
+        }
+
         adapters = AbilityAdapters(AbilityAdapters.OnClickListener{
             viewModel.displayPropertyDetails(it)
         })
         binding.abilityList.adapter = adapters
 
         viewModel.allAbilityListViews.observe(viewLifecycleOwner){
-            abilityListEntities = it
             adapters.submitList(it)
         }
+
+        viewModel.noAbilityVisible.observe(viewLifecycleOwner, Observer {
+                binding.noAbilityFoundText.visibility = it
+        })
 
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if (null != it){
@@ -68,6 +82,7 @@ class AbilityOverviewFragment : Fragment() {
         // Search View
 
         searchView = binding.abilitySearchView
+
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -92,8 +107,7 @@ class AbilityOverviewFragment : Fragment() {
             )
         }
 
-        val noAbilityFoundText = binding.noAbilityFoundText
-        noAbilityFoundText.visibility = if(filteredList.isEmpty()) View.VISIBLE else View.GONE
+        binding.noAbilityFoundText.visibility = if(filteredList.isEmpty()) View.VISIBLE else View.GONE
         adapters.submitList(filteredList)
     }
 

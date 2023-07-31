@@ -6,7 +6,7 @@
     <data>
         <variable
             name="pokemonEntity"
-            type="com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity" />
+            type="com.vishalag53.pokedex.database.pokedexDatabase.PokedexEntity" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -32,7 +32,7 @@
                 android:background="@drawable/half_rounded_corner"
                 android:contentDescription="@string/pokemon_image"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{pokemonEntity.front_default}"
+                app:imageUrl="@{pokemonEntity.frontDefault}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

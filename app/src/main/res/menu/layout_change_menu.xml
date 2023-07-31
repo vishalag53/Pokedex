@@ -6,6 +6,5 @@
         android:enabled="true"
         android:icon="@drawable/view_list_48px"
         android:title="@string/layout_change"
-        android:visible="true"
-        app:showAsAction="ifRoom" />
+        android:visible="true"/>
 </menu>

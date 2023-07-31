@@ -11,7 +11,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/black"
-            tools:context=".pokemon.pokemonoverview.PokemonOverviewFragment">
+            tools:context=".pokedex.pokedexoverview.PokedexOverviewFragment">
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -21,11 +21,11 @@
                 android:clipToPadding="false"
                 android:padding="6dp"
                 tools:itemCount="21"
-                tools:listitem="@layout/linear_list_item_pokemon"
+                tools:listitem="@layout/linear_list_item_pokedex"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/noPokemonFoundText"

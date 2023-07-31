@@ -2,46 +2,13 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main_navigation"
-    app:startDestination="@id/homeFragment">
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.vishalag53.pokedex.HomeFragment"
-        android:label="@string/app_name"
-        tools:layout="@layout/fragment_home">
-        <action
-            android:id="@+id/navigate_homeFragment_to_abilityOverviewFragment"
-            app:destination="@id/abilityOverviewFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/navigate_homeFragment_to_favoriteOverviewFragment"
-            app:destination="@id/favoriteOverviewFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
-        <action
-            android:id="@+id/navigate_homeFragment_to_pokemonOverviewFragment"
-            app:destination="@id/pokemonOverviewFragment"
-            app:enterAnim="@anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="false" />
-    </fragment>
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/pokedexOverviewFragment">
     <fragment
         android:id="@+id/abilityOverviewFragment"
         android:name="com.vishalag53.pokedex.ability.abilityoverview.AbilityOverviewFragment"
         android:label="@string/ability"
-        tools:layout="@layout/fragment_ability_overview" >
+        tools:layout="@layout/fragment_ability_overview">
         <action
             android:id="@+id/action_abilityOverviewFragment_to_abilityDetailFragment"
             app:destination="@id/abilityDetailFragment"
@@ -58,8 +25,8 @@
         android:label="@string/favorite"
         tools:layout="@layout/fragment_favorite_overview" >
         <action
-            android:id="@+id/action_favoriteOverviewFragment_to_pokemonDetailFragment"
-            app:destination="@id/pokemonDetailFragment"
+            android:id="@+id/action_favoriteOverviewFragment_to_pokedexDetailFragment"
+            app:destination="@id/pokedexDetailFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
@@ -68,29 +35,29 @@
             app:popUpToInclusive="false"/>
     </fragment>
     <fragment
-        android:id="@+id/pokemonOverviewFragment"
-        android:name="com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonOverviewFragment"
-        android:label="@string/pokemon"
-        tools:layout="@layout/fragment_pokemon_overview">
+        android:id="@+id/pokedexOverviewFragment"
+        android:name="com.vishalag53.pokedex.pokedex.pokedexoverview.PokedexOverviewFragment"
+        android:label="Pokedex"
+        tools:layout="@layout/fragment_pokedex_overview">
         <action
             android:id="@+id/action_pokemonOverviewFragment_to_pokemonDetailFragment"
-            app:destination="@id/pokemonDetailFragment"
+            app:destination="@id/pokedexDetailFragment"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
             app:popEnterAnim="@anim/slide_in_right"
             app:popExitAnim="@anim/slide_out_left"
-            app:popUpTo="@id/pokemonOverviewFragment"
+            app:popUpTo="@id/pokedexOverviewFragment"
             app:popUpToInclusive="false" />
 
     </fragment>
     <fragment
-        android:id="@+id/pokemonDetailFragment"
-        android:name="com.vishalag53.pokedex.pokemon.pokemondetail.PokemonDetailFragment"
-        android:label="Pokemon Detail"
-        tools:layout="@layout/fragment_pokemon_detail">
+        android:id="@+id/pokedexDetailFragment"
+        android:name="com.vishalag53.pokedex.pokedex.pokedexdetail.PokedexDetailFragment"
+        android:label="Pokedex Detail"
+        tools:layout="@layout/fragment_pokedex_detail">
         <argument
             android:name="selectedPropertyPokemon"
-            app:argType="com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity" />
+            app:argType="com.vishalag53.pokedex.database.pokedexDatabase.PokedexEntity" />
     </fragment>
     <fragment
         android:id="@+id/abilityDetailFragment"
@@ -101,4 +68,5 @@
             android:name="selectedPropertyAbility"
             app:argType="com.vishalag53.pokedex.database.abilityDatabase.AbilityEntity"/>
     </fragment>
+
 </navigation>

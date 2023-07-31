@@ -6,14 +6,14 @@ import com.vishalag53.pokedex.database.abilityDatabase.AbilityDatabase
 import com.vishalag53.pokedex.database.abilityDatabase.AbilityDatabaseDao
 import com.vishalag53.pokedex.database.favoriteDatabase.FavoriteDatabase
 import com.vishalag53.pokedex.database.favoriteDatabase.FavoriteDatabaseDao
-import com.vishalag53.pokedex.database.pokemonDatabase.PokemonDatabase
-import com.vishalag53.pokedex.database.pokemonDatabase.PokemonDatabaseDao
+import com.vishalag53.pokedex.database.pokedexDatabase.PokedexDatabase
+import com.vishalag53.pokedex.database.pokedexDatabase.PokedexDatabaseDao
 
 class MyApplication: Application() {
 
 
-    lateinit var databasePokemon: PokemonDatabase
-    lateinit var daoDatabasePokemon: PokemonDatabaseDao
+    lateinit var databasePokedex: PokedexDatabase
+    lateinit var daoDatabasePokedex: PokedexDatabaseDao
 
     lateinit var databaseFavorite: FavoriteDatabase
     lateinit var daoDatabaseFavorite: FavoriteDatabaseDao
@@ -26,15 +26,15 @@ class MyApplication: Application() {
 
         // Database Pokemon
 
-        databasePokemon = Room.databaseBuilder(
+        databasePokedex = Room.databaseBuilder(
             applicationContext,
-            PokemonDatabase::class.java,
+            PokedexDatabase::class.java,
             "pokemon_detail_database"
         )
             .fallbackToDestructiveMigration()
             .build()
 
-        daoDatabasePokemon = databasePokemon.pokemonDatabaseDao()
+        daoDatabasePokedex = databasePokedex.pokedexDatabaseDao()
 
         // Database Favorite
 

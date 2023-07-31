@@ -166,7 +166,7 @@
                     android:padding="6dp"
                     tools:itemCount="4"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/linear_list_item_pokemon"
+                    tools:listitem="@layout/linear_list_item_pokedex"
                     app:layout_constraintStart_toStartOf="@id/cl1"
                     app:layout_constraintEnd_toEndOf="@id/cl1"
                     app:layout_constraintBottom_toBottomOf="@id/cv2"

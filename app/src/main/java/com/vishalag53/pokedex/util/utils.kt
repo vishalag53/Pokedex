@@ -42,16 +42,6 @@ fun getTotal(pokemonInfo: PokemonInfo): String {
     return sum.toString()
 }
 
-fun getEggGroups(eggGroups: List<EggGroup>) : List<String>{
-    val eggGroupsList = mutableListOf<String>()
-
-    for (eggGroup in eggGroups){
-        eggGroupsList.add(eggGroup.name)
-    }
-
-    return eggGroupsList
-}
-
 fun getInDepthEffectFromAbility(effectEntries: List<EffectEntryX>): String{
     var inDepthEffect = ""
 

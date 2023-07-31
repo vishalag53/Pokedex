@@ -1,4 +1,4 @@
-package com.vishalag53.pokedex.pokemon.pokemondetail
+package com.vishalag53.pokedex.pokedex.pokedexdetail
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -15,17 +15,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.vishalag53.pokedex.MyApplication
 import com.vishalag53.pokedex.R
-import com.vishalag53.pokedex.databinding.FragmentPokemonDetailBinding
+import com.vishalag53.pokedex.databinding.FragmentPokedexDetailBinding
 import com.vishalag53.pokedex.network.PokemonApi
 import com.vishalag53.pokedex.network.PokemonApiUtilities
 import com.vishalag53.pokedex.repository.FavoriteRepository
-import com.vishalag53.pokedex.repository.PokemonRepository
+import com.vishalag53.pokedex.repository.PokedexRepository
 
 @Suppress("DEPRECATION")
-class PokemonDetailFragment : Fragment() {
-    private lateinit var viewModel: PokemonDetailViewModel
+class PokedexDetailFragment : Fragment() {
+    private lateinit var viewModel: PokedexDetailViewModel
 
-    lateinit var binding: FragmentPokemonDetailBinding
+    lateinit var binding: FragmentPokedexDetailBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,22 +33,22 @@ class PokemonDetailFragment : Fragment() {
     ): View {
         val application = requireNotNull(this.activity).application as MyApplication
 
-        binding = FragmentPokemonDetailBinding.inflate(inflater)
+        binding = FragmentPokedexDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
 
         val pokemonApi = PokemonApiUtilities.getInstance().create(PokemonApi::class.java)
 
-        val pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon)
+        val pokedexRepository = PokedexRepository(pokemonApi, application.daoDatabasePokedex)
         val favoriteRepository = FavoriteRepository(pokemonApi, application.daoDatabaseFavorite)
 
         val pokemonEntity =
-            PokemonDetailFragmentArgs.fromBundle(requireArguments()).selectedPropertyPokemon
+            PokedexDetailFragmentArgs.fromBundle(requireArguments()).selectedPropertyPokemon
 
         ViewModelProvider(
             this,
-            PokemonDetailViewModelFactory(pokemonEntity, pokemonRepository, favoriteRepository)
-        )[PokemonDetailViewModel::class.java].also { viewModel = it }
+            PokedexDetailViewModelFactory(pokemonEntity, pokedexRepository, favoriteRepository)
+        )[PokedexDetailViewModel::class.java].also { viewModel = it }
 
         binding.viewModel = viewModel
 
@@ -80,7 +80,7 @@ class PokemonDetailFragment : Fragment() {
     }
 
     private fun getShareIntent(): Intent{
-        val args = PokemonDetailFragmentArgs.fromBundle(requireArguments())
+        val args = PokedexDetailFragmentArgs.fromBundle(requireArguments())
 
         return ShareCompat.IntentBuilder.from(requireActivity())
             .setText(getString(R.string.share_favourite_pokemon, args.selectedPropertyPokemon.name))

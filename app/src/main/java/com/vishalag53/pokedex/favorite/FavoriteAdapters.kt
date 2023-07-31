@@ -8,13 +8,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
-import com.vishalag53.pokedex.databinding.GridListItemPokemonBinding
-import com.vishalag53.pokedex.databinding.LinearListItemPokemonBinding
+import com.vishalag53.pokedex.database.pokedexDatabase.PokedexEntity
+import com.vishalag53.pokedex.databinding.GridListItemPokedexBinding
+import com.vishalag53.pokedex.databinding.LinearListItemPokedexBinding
 
 class FavoriteAdapters (
     private var onClickListener: OnClickListener
-): ListAdapter<PokemonEntity,RecyclerView.ViewHolder>(DiffCallback){
+): ListAdapter<PokedexEntity,RecyclerView.ViewHolder>(DiffCallback){
 
     enum class LayoutType{ GRID, LINEAR }
 
@@ -23,31 +23,31 @@ class FavoriteAdapters (
 
     var currentLayoutType = LayoutType.GRID
 
-    class GridPokemonViewHolder(private var binding: GridListItemPokemonBinding): RecyclerView.ViewHolder(binding.root){
+    class GridPokemonViewHolder(private var binding: GridListItemPokedexBinding): RecyclerView.ViewHolder(binding.root){
         val gridListItemPokemon: ConstraintLayout = binding.gridListItemPokemon
-        fun bind(pokemonEntity: PokemonEntity) {
-            binding.pokemonEntity = pokemonEntity
+        fun bind(pokedexEntity: PokedexEntity) {
+            binding.pokemonEntity = pokedexEntity
             binding.executePendingBindings()
         }
     }
 
-    class LinearPokemonViewHolder(private var binding: LinearListItemPokemonBinding) :
+    class LinearPokemonViewHolder(private var binding: LinearListItemPokedexBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         val linearListItemPokemon: ConstraintLayout = binding.linearListItemPokemon
 
-        fun bind(pokemonEntity: PokemonEntity) {
-            binding.pokemonEntity = pokemonEntity
+        fun bind(pokedexEntity: PokedexEntity) {
+            binding.pokemonEntity = pokedexEntity
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<PokemonEntity>(){
-        override fun areItemsTheSame(oldItem: PokemonEntity, newItem: PokemonEntity): Boolean {
+    companion object DiffCallback: DiffUtil.ItemCallback<PokedexEntity>(){
+        override fun areItemsTheSame(oldItem: PokedexEntity, newItem: PokedexEntity): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: PokemonEntity, newItem: PokemonEntity): Boolean {
+        override fun areContentsTheSame(oldItem: PokedexEntity, newItem: PokedexEntity): Boolean {
             return oldItem.id == newItem.id
         }
     }
@@ -55,7 +55,7 @@ class FavoriteAdapters (
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType){
             VIEW_TYPE_GRID -> {
-                val binding = GridListItemPokemonBinding.inflate(
+                val binding = GridListItemPokedexBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -63,7 +63,7 @@ class FavoriteAdapters (
                 GridPokemonViewHolder(binding)
             }
             VIEW_TYPE_LINEAR ->{
-                val binding = LinearListItemPokemonBinding.inflate(
+                val binding = LinearListItemPokedexBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
@@ -76,22 +76,22 @@ class FavoriteAdapters (
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewType = getItemViewType(position)
-        val pokemonEntity = getItem(position) as PokemonEntity
+        val pokedexEntity = getItem(position) as PokedexEntity
         val context = holder.itemView.context
         when (viewType){
             VIEW_TYPE_GRID -> {
-                setBkgColor(pokemonEntity.color,holder,viewType,context)
+                setBkgColor(pokedexEntity.color,holder,viewType,context)
                 holder.itemView.setOnClickListener{
-                    onClickListener.onClick(pokemonEntity)
+                    onClickListener.onClick(pokedexEntity)
                 }
-                (holder as GridPokemonViewHolder).bind(pokemonEntity)
+                (holder as GridPokemonViewHolder).bind(pokedexEntity)
             }
             VIEW_TYPE_LINEAR -> {
-                setBkgColor(pokemonEntity.color,holder,viewType,context)
+                setBkgColor(pokedexEntity.color,holder,viewType,context)
                 holder.itemView.setOnClickListener {
-                    onClickListener.onClick(pokemonEntity)
+                    onClickListener.onClick(pokedexEntity)
                 }
-                (holder as LinearPokemonViewHolder).bind(pokemonEntity)
+                (holder as LinearPokemonViewHolder).bind(pokedexEntity)
             }
         }
     }
@@ -122,8 +122,8 @@ class FavoriteAdapters (
 
     }
 
-    class OnClickListener(val clickListener : (pokemonEntity: PokemonEntity) -> Unit){
-        fun onClick(pokemonEntity: PokemonEntity) = clickListener(pokemonEntity)
+    class OnClickListener(val clickListener : (pokedexEntity: PokedexEntity) -> Unit){
+        fun onClick(pokedexEntity: PokedexEntity) = clickListener(pokedexEntity)
     }
 
 }

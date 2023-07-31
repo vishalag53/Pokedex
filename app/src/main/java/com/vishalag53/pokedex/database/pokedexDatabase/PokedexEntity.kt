@@ -1,4 +1,4 @@
-package com.vishalag53.pokedex.database.pokemonDatabase
+package com.vishalag53.pokedex.database.pokedexDatabase
 
 import android.os.Parcelable
 import androidx.room.Entity
@@ -8,10 +8,10 @@ import kotlinx.android.parcel.RawValue
 
 @Suppress("DEPRECATED_ANNOTATION")
 @Parcelize
-@Entity(tableName = "pokemon_list_view")
-data class PokemonEntity(
+@Entity(tableName = "pokedex_list_view")
+data class PokedexEntity(
     @PrimaryKey(autoGenerate = true) val id1: Int = 0,
-    val front_default: String?,
+    val frontDefault: String?,
     val id: String,
     val name: String,
     val type1: String?,
@@ -21,18 +21,18 @@ data class PokemonEntity(
     val hp: String?,
     val attack: String?,
     val defense: String?,
-    val special_attack: String?,
-    val special_defense: String?,
+    val specialAttack: String?,
+    val specialDefense: String?,
     val speed: String?,
     val color: Int,
     val total: String?,
-    val front_shinny: String?,
-    val base_happiness: String?,
-    val capture_rate: String?,
-    val pokemon_color: String?,
-    val egg_groups: @RawValue List<String>,
-    val growth_rates: String?,
-    val hatch_count: String?,
+    val frontShinny: String?,
+    val baseHappiness: String?,
+    val captureRate: String?,
+    val pokemonColor: String?,
+    val eggGroups: String?,
+    val growthRates: String?,
+    val hatchCount: String?,
     val shape: String?,
     var isFav: Boolean
 ) : Parcelable

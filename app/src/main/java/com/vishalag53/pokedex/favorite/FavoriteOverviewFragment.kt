@@ -22,7 +22,7 @@ import com.vishalag53.pokedex.databinding.FragmentFavoriteOverviewBinding
 import com.vishalag53.pokedex.network.PokemonApi
 import com.vishalag53.pokedex.network.PokemonApiUtilities
 import com.vishalag53.pokedex.repository.FavoriteRepository
-import com.vishalag53.pokedex.repository.PokemonRepository
+import com.vishalag53.pokedex.repository.PokedexRepository
 
 
 @Suppress("DEPRECATION")
@@ -33,7 +33,7 @@ class FavoriteOverviewFragment : Fragment() {
     private lateinit var adapters: FavoriteAdapters
     private lateinit var layoutManager: RecyclerView.LayoutManager
     private lateinit var favoriteRepository: FavoriteRepository
-    private lateinit var pokemonRepository: PokemonRepository
+    private lateinit var pokedexRepository: PokedexRepository
 
 
     override fun onCreateView(
@@ -52,11 +52,11 @@ class FavoriteOverviewFragment : Fragment() {
             application.daoDatabaseFavorite,
         )
 
-        pokemonRepository = PokemonRepository(pokemonApi,application.daoDatabasePokemon)
+        pokedexRepository = PokedexRepository(pokemonApi,application.daoDatabasePokedex)
 
         viewModel = ViewModelProvider(
             this,
-            FavoriteOverviewViewModelFactory(pokemonRepository,favoriteRepository,application.daoDatabaseFavorite)
+            FavoriteOverviewViewModelFactory(pokedexRepository,favoriteRepository,application.daoDatabaseFavorite)
         )[FavoriteOverviewViewModel::class.java]
 
         adapters = FavoriteAdapters(FavoriteAdapters.OnClickListener {
@@ -74,7 +74,7 @@ class FavoriteOverviewFragment : Fragment() {
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(
-                    FavoriteOverviewFragmentDirections.actionFavoriteOverviewFragmentToPokemonDetailFragment(
+                    FavoriteOverviewFragmentDirections.actionFavoriteOverviewFragmentToPokedexDetailFragment(
                         it
                     )
                 )
@@ -114,6 +114,24 @@ class FavoriteOverviewFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.fav_fragment_menu, menu)
+        layoutChangeInCOM(menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.layoutChangeMenu -> workOnLayoutChange(item)
+            R.id.deleteAllFav -> { viewModel.deleteAllFavorites()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    // Layout Change
+
+    private fun layoutChangeInCOM(menu: Menu) {
         val toggleBtn = menu.findItem(R.id.layoutChangeMenu)
         toggleBtn.setIcon(
             if (adapters.currentLayoutType == FavoriteAdapters.LayoutType.GRID) {
@@ -123,50 +141,41 @@ class FavoriteOverviewFragment : Fragment() {
             }
         )
         toggleBtn.setTitle(
-            if(adapters.currentLayoutType == FavoriteAdapters.LayoutType.GRID) {
+            if (adapters.currentLayoutType == FavoriteAdapters.LayoutType.GRID) {
                 R.string.change_in_list
             } else {
                 R.string.change_in_grid
             }
         )
-        super.onCreateOptionsMenu(menu, inflater)
     }
 
-    @Deprecated("Deprecated in Java")
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.layoutChangeMenu -> {
-                val viewModel: FavoriteOverviewViewModel by viewModels()
-                val currentLayoutType =
-                    if (viewModel.currentLayoutType.value == FavoriteAdapters.LayoutType.GRID) {
-                        FavoriteAdapters.LayoutType.LINEAR
-                    } else {
-                        FavoriteAdapters.LayoutType.GRID
-                    }
-                viewModel.setCurrentLayoutType(currentLayoutType)
 
-                item.setIcon(
-                    if (adapters.currentLayoutType == FavoriteAdapters.LayoutType.GRID) {
-                        R.drawable.view_list_48px
-                    } else {
-                        R.drawable.grid_on_48px
-                    }
-                )
-                item.setTitle(
-                    if(adapters.currentLayoutType == FavoriteAdapters.LayoutType.GRID) {
-                        R.string.change_in_list
-                    } else {
-                        R.string.change_in_grid
-                    }
-                )
-                return true
+    private fun workOnLayoutChange(item: MenuItem): Boolean {
+        val viewModel: FavoriteOverviewViewModel by viewModels()
+        val currentLayoutType =
+            if (viewModel.currentLayoutType.value == FavoriteAdapters.LayoutType.GRID) {
+                FavoriteAdapters.LayoutType.LINEAR
+            } else {
+                FavoriteAdapters.LayoutType.GRID
             }
-            R.id.deleteAllFav -> {
-                viewModel.deleteAllFavorites()
-                return true
+        viewModel.setCurrentLayoutType(currentLayoutType)
+
+        item.setIcon(
+            if (adapters.currentLayoutType == FavoriteAdapters.LayoutType.GRID) {
+                R.drawable.view_list_48px
+            } else {
+                R.drawable.grid_on_48px
             }
-            else -> return super.onOptionsItemSelected(item)
-        }
+        )
+        item.setTitle(
+            if (adapters.currentLayoutType == FavoriteAdapters.LayoutType.GRID) {
+                R.string.change_in_list
+            } else {
+                R.string.change_in_grid
+            }
+        )
+        return true
     }
+
 
 }

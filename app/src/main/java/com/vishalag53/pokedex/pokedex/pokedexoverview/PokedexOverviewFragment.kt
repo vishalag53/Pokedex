@@ -1,4 +1,4 @@
-package com.vishalag53.pokedex.pokemon.pokemonoverview
+package com.vishalag53.pokedex.pokedex.pokedexoverview
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -18,44 +18,45 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.vishalag53.pokedex.MyApplication
 import com.vishalag53.pokedex.R
-import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
-import com.vishalag53.pokedex.databinding.FragmentPokemonOverviewBinding
+import com.vishalag53.pokedex.database.pokedexDatabase.PokedexEntity
+import com.vishalag53.pokedex.databinding.FragmentPokedexOverviewBinding
 import com.vishalag53.pokedex.network.PokemonApi
 import com.vishalag53.pokedex.network.PokemonApiUtilities
-import com.vishalag53.pokedex.repository.PokemonRepository
+import com.vishalag53.pokedex.repository.PokedexRepository
 
 
 @Suppress( "DEPRECATION")
-class PokemonOverviewFragment : Fragment() {
+class PokedexOverviewFragment : Fragment() {
 
-    private lateinit var viewModel: PokemonOverviewViewModel
-    private lateinit var adapters: PokemonAdapters
-    private lateinit var pokemonListEntities: List<PokemonEntity>
+    private lateinit var viewModel: PokedexOverviewViewModel
+    private lateinit var adapters: PokedexAdapters
+    private lateinit var pokemonListEntities: List<PokedexEntity>
     private lateinit var searchView: SearchView
     private lateinit var layoutManager: RecyclerView.LayoutManager
-    private lateinit var binding: FragmentPokemonOverviewBinding
-    private lateinit var pokemonRepository: PokemonRepository
+    private lateinit var binding: FragmentPokedexOverviewBinding
+    private lateinit var pokedexRepository: PokedexRepository
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
 
-        binding = FragmentPokemonOverviewBinding.inflate(inflater)
+        binding = FragmentPokedexOverviewBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
         val application = requireNotNull(this.activity).application as MyApplication
 
         val pokemonApi = PokemonApiUtilities.getInstance().create(PokemonApi::class.java)
 
-        pokemonRepository = PokemonRepository(pokemonApi, application.daoDatabasePokemon)
+        pokedexRepository = PokedexRepository(pokemonApi, application.daoDatabasePokedex)
 
         viewModel = ViewModelProvider(
             this,
-            PokemonOverviewViewModelFactory(pokemonRepository)
-        )[PokemonOverviewViewModel::class.java]
+            PokedexOverviewViewModelFactory(pokedexRepository)
+        )[PokedexOverviewViewModel::class.java]
 
-        adapters = PokemonAdapters(PokemonAdapters.OnClickListener {
+        adapters = PokedexAdapters(PokedexAdapters.OnClickListener {
             viewModel.displayPropertyDetails(it)
         })
         binding.pokemonGrid.adapter = adapters
@@ -68,13 +69,15 @@ class PokemonOverviewFragment : Fragment() {
         viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
             if (null != it) {
                 this.findNavController().navigate(
-                    PokemonOverviewFragmentDirections.actionPokemonOverviewFragmentToPokemonDetailFragment(
+                    PokedexOverviewFragmentDirections.actionPokemonOverviewFragmentToPokemonDetailFragment(
                         it
                     )
                 )
                 viewModel.displayPropertyDetailsComplete()
             }
         })
+
+        recyclerView = binding.pokemonGrid
 
         // Search View
 
@@ -101,7 +104,7 @@ class PokemonOverviewFragment : Fragment() {
 
         viewModel.currentLayoutType.observe(viewLifecycleOwner) { layoutType ->
             adapters.currentLayoutType = layoutType
-            layoutManager = if (layoutType == PokemonAdapters.LayoutType.GRID) {
+            layoutManager = if (layoutType == PokedexAdapters.LayoutType.GRID) {
                 GridLayoutManager(context, 2)
             } else {
                 LinearLayoutManager(context)
@@ -142,41 +145,62 @@ class PokemonOverviewFragment : Fragment() {
     @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_change_menu, menu)
-        val toggleBtn = menu.findItem(R.id.layoutChangeMenu)
-        toggleBtn.setIcon(
-            if (adapters.currentLayoutType == PokemonAdapters.LayoutType.GRID) {
-                R.drawable.view_list_48px
-            } else {
-                R.drawable.grid_on_48px
-            }
-        )
+        layoutChangeInCOM(menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
 
     @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.layoutChangeMenu -> {
-                val viewModel: PokemonOverviewViewModel by viewModels()
-                val currentLayoutType =
-                    if (viewModel.currentLayoutType.value == PokemonAdapters.LayoutType.GRID) {
-                        PokemonAdapters.LayoutType.LINEAR
-                    } else {
-                        PokemonAdapters.LayoutType.GRID
-                    }
-                viewModel.setCurrentLayoutType(currentLayoutType)
-
-                item.setIcon(
-                    if (adapters.currentLayoutType == PokemonAdapters.LayoutType.GRID) {
-                        R.drawable.view_list_48px
-                    } else {
-                        R.drawable.grid_on_48px
-                    }
-                )
-                return true
-            }
-            else -> return super.onOptionsItemSelected(item)
+        return when (item.itemId) {
+            R.id.layoutChangeMenu -> workOnLayoutChange(item)
+            else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    // Layout Change
+    private fun layoutChangeInCOM(menu: Menu) {
+        val toggleBtn = menu.findItem(R.id.layoutChangeMenu)
+        toggleBtn.setIcon(
+            if (adapters.currentLayoutType == PokedexAdapters.LayoutType.GRID) {
+                R.drawable.view_list_48px
+            } else {
+                R.drawable.grid_on_48px
+            }
+        )
+        toggleBtn.setTitle(
+            if (adapters.currentLayoutType == PokedexAdapters.LayoutType.GRID) {
+                R.string.change_in_list
+            } else {
+                R.string.change_in_grid
+            }
+        )
+    }
+
+    private fun workOnLayoutChange(item: MenuItem): Boolean {
+        val viewModel: PokedexOverviewViewModel by viewModels()
+        val currentLayoutType =
+            if (viewModel.currentLayoutType.value == PokedexAdapters.LayoutType.GRID) {
+                PokedexAdapters.LayoutType.LINEAR
+            } else {
+                PokedexAdapters.LayoutType.GRID
+            }
+        viewModel.setCurrentLayoutType(currentLayoutType)
+
+        item.setIcon(
+            if (adapters.currentLayoutType == PokedexAdapters.LayoutType.GRID) {
+                R.drawable.view_list_48px
+            } else {
+                R.drawable.grid_on_48px
+            }
+        )
+        item.setTitle(
+            if (adapters.currentLayoutType == PokedexAdapters.LayoutType.GRID) {
+                R.string.change_in_list
+            } else {
+                R.string.change_in_grid
+            }
+        )
+        return true
     }
 
 

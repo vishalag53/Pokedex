@@ -1,10 +1,7 @@
 package com.vishalag53.pokedex
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -12,25 +9,36 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vishalag53.pokedex.databinding.ActivityMainBinding
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var bottomNavigationView: BottomNavigationView
     private lateinit var navController: NavController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         drawer()
+
+        bottomNavigationView = binding.bnView
+
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.frameLayout) as NavHostFragment
+        navController = navHostFragment.navController
+        bottomNavigationView.setupWithNavController(navController)
+
     }
 
-    fun drawer() {
+    private fun drawer() {
         drawerLayout = binding.drawerLayout
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.myNavHostFragment) as NavHostFragment
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.frameLayout) as NavHostFragment
         navController = navHostFragment.navController
         NavigationUI.setupActionBarWithNavController(this,navController,drawerLayout)
         appBarConfiguration = AppBarConfiguration(navController.graph,drawerLayout)
@@ -47,32 +55,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val navController = this.findNavController(R.id.myNavHostFragment)
+        val navController = this.findNavController(R.id.frameLayout)
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 
-
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.fav_menu,menu)
-
-        val favMenu = menu?.findItem(R.id.favMenu)
-
-        favMenu?.setOnMenuItemClickListener {
-            navController.navigate(R.id.favoriteOverviewFragment)
-            true
+    override fun onBackPressed() {
+        val navController = findNavController(R.id.frameLayout)
+        if (navController.currentDestination?.id != R.id.pokedexOverviewFragment){
+            navController.popBackStack()
         }
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.favMenu -> {
-                navController.navigate(R.id.favoriteOverviewFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        else{
+            super.onBackPressed()
         }
 
     }

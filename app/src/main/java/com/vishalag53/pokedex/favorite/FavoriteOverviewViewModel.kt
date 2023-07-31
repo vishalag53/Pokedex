@@ -7,13 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.vishalag53.pokedex.database.favoriteDatabase.FavoriteDatabaseDao
-import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
+import com.vishalag53.pokedex.database.pokedexDatabase.PokedexEntity
 import com.vishalag53.pokedex.repository.FavoriteRepository
-import com.vishalag53.pokedex.repository.PokemonRepository
+import com.vishalag53.pokedex.repository.PokedexRepository
 import kotlinx.coroutines.launch
 
 class FavoriteOverviewViewModel(
-    private val pokemonRepository: PokemonRepository,
+    private val pokedexRepository: PokedexRepository,
     private val favoriteRepository: FavoriteRepository,
     private val daoDatabaseFavorite: FavoriteDatabaseDao
 ) : ViewModel() {
@@ -21,7 +21,7 @@ class FavoriteOverviewViewModel(
     val currentLayoutType: LiveData<FavoriteAdapters.LayoutType>
         get() = _currentLayoutType
 
-    val allFavoritePokemonListViews : LiveData<List<PokemonEntity>> = liveData {
+    val allFavoritePokemonListViews : LiveData<List<PokedexEntity>> = liveData {
         val favoritePokemonListViews = favoriteRepository.getAllFavoriteListFromDB()
         emit(favoritePokemonListViews)
     }
@@ -31,11 +31,11 @@ class FavoriteOverviewViewModel(
         _currentLayoutType.value = FavoriteAdapters.LayoutType.GRID
     }
 
-    private val _navigateToSelectedProperty = MutableLiveData<PokemonEntity>()
-    val navigateToSelectedProperty: LiveData<PokemonEntity>
+    private val _navigateToSelectedProperty = MutableLiveData<PokedexEntity>()
+    val navigateToSelectedProperty: LiveData<PokedexEntity>
         get() = _navigateToSelectedProperty
 
-    fun displayPropertyDetails(pokemonList: PokemonEntity){
+    fun displayPropertyDetails(pokemonList: PokedexEntity){
         _navigateToSelectedProperty.value = pokemonList
     }
 
@@ -48,8 +48,8 @@ class FavoriteOverviewViewModel(
         _currentLayoutType.value = layoutType
     }
 
-    private val _favoriteList = MutableLiveData<List<PokemonEntity>>()
-    val favoriteList: LiveData<List<PokemonEntity>>
+    private val _favoriteList = MutableLiveData<List<PokedexEntity>>()
+    val favoriteList: LiveData<List<PokedexEntity>>
         get() = _favoriteList
 
     fun loadFavoriteFromDB(){
@@ -62,7 +62,7 @@ class FavoriteOverviewViewModel(
     fun deleteAllFavorites(){
         viewModelScope.launch {
             favoriteRepository.getAllFavoriteListFromDB().forEach {
-                pokemonRepository.updatePokemonFav(it.name,false)
+                pokedexRepository.updatePokemonFav(it.name,false)
             }
             favoriteRepository.deleteAllFavorite()
             _favoriteList.postValue(emptyList())

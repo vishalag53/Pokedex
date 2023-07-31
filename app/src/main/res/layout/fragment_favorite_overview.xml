@@ -17,7 +17,7 @@
             android:clipToPadding="false"
             android:padding="6dp"
             tools:itemCount="21"
-            tools:listitem="@layout/linear_list_item_pokemon"
+            tools:listitem="@layout/linear_list_item_pokedex"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
