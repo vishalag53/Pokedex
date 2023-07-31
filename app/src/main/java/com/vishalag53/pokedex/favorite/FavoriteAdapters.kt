@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.vishalag53.pokedex.database.pokemonDatabase.PokemonEntity
 import com.vishalag53.pokedex.databinding.GridListItemPokemonBinding
 import com.vishalag53.pokedex.databinding.LinearListItemPokemonBinding
-import com.vishalag53.pokedex.pokemon.pokemonoverview.PokemonAdapters
 
 class FavoriteAdapters (
     private var onClickListener: OnClickListener

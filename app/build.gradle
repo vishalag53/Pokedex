@@ -21,7 +21,7 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -103,4 +103,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$version_room_database"
 
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:$version_serialization"
+
+    implementation 'androidx.multidex:multidex:2.0.1'
 }

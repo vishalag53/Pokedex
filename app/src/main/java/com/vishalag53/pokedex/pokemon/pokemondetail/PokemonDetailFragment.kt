@@ -1,5 +1,6 @@
 package com.vishalag53.pokedex.pokemon.pokemondetail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +11,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.vishalag53.pokedex.MyApplication
@@ -30,7 +30,7 @@ class PokemonDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val application = requireNotNull(this.activity).application as MyApplication
 
         binding = FragmentPokemonDetailBinding.inflate(inflater)
@@ -92,6 +92,8 @@ class PokemonDetailFragment : Fragment() {
         startActivity(getShareIntent())
     }
 
+    @SuppressLint("QueryPermissionsNeeded")
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.share_menu,menu)
@@ -100,6 +102,7 @@ class PokemonDetailFragment : Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId){
             R.id.shareMenu -> shareSuccess()

@@ -3,10 +3,10 @@ package com.vishalag53.pokedex.database.pokemonDatabase
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.vishalag53.pokedex.response.*
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.parcel.RawValue
 
+@Suppress("DEPRECATED_ANNOTATION")
 @Parcelize
 @Entity(tableName = "pokemon_list_view")
 data class PokemonEntity(

@@ -6,6 +6,7 @@ import com.vishalag53.pokedex.database.favoriteDatabase.FavoriteDatabaseDao
 import com.vishalag53.pokedex.repository.FavoriteRepository
 import com.vishalag53.pokedex.repository.PokemonRepository
 
+@Suppress("UNCHECKED_CAST")
 class FavoriteOverviewViewModelFactory(
     private val pokemonRepository: PokemonRepository,
     private val favoriteRepository: FavoriteRepository,

@@ -39,7 +39,7 @@ class FavoriteOverviewFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_favorite_overview, container, false)
@@ -90,10 +90,10 @@ class FavoriteOverviewFragment : Fragment() {
 
         viewModel.currentLayoutType.observe(viewLifecycleOwner) { layoutType ->
             adapters.currentLayoutType = layoutType
-            if (layoutType == FavoriteAdapters.LayoutType.GRID) {
-                layoutManager = GridLayoutManager(context, 2)
+            layoutManager = if (layoutType == FavoriteAdapters.LayoutType.GRID) {
+                GridLayoutManager(context, 2)
             } else {
-                layoutManager = LinearLayoutManager(context)
+                LinearLayoutManager(context)
             }
             binding.pokemonFavoriteGrid.layoutManager = layoutManager
         }
@@ -111,8 +111,9 @@ class FavoriteOverviewFragment : Fragment() {
         return binding.root
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.fav_menu, menu)
+        inflater.inflate(R.menu.fav_fragment_menu, menu)
         val toggleBtn = menu.findItem(R.id.layoutChangeMenu)
         toggleBtn.setIcon(
             if (adapters.currentLayoutType == FavoriteAdapters.LayoutType.GRID) {
@@ -131,6 +132,7 @@ class FavoriteOverviewFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.layoutChangeMenu -> {

@@ -14,8 +14,6 @@ class PokemonRepository(
     private val pokemonDatabaseDao: PokemonDatabaseDao
 ) {
 
-    // Pokemon Database
-
     suspend fun getPokemonListView() {
         val pokemonListResponse = pokemonApi.getPokemonList()
         val pokemonList = pokemonListResponse.body()?.results ?: emptyList()
@@ -32,7 +30,7 @@ class PokemonRepository(
             val pokemonSpeciesResponse = pokemonApi.getPokemonSpeciesInfo(pokemonId)
             val pokemonSpecies = pokemonSpeciesResponse.body()
 
-            if (pokemonInfo != null && pokemonSpecies != null) {
+            if (pokemonSpecies != null) {
                 val pokemonEntityList = PokemonEntity(
                     front_default = pokemonInfo.sprites.front_default,
                     id = getId(pokemonInfo.id.toString()),

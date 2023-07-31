@@ -5,12 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.vishalag53.pokedex.database.abilityDatabase.AbilityEntity
-import com.vishalag53.pokedex.repository.AbilityRepository
-import com.vishalag53.pokedex.repository.PokemonRepository
 
 class AbilityDetailViewModel(
-    private val abilityEntity: AbilityEntity,
-    private val abilityRepository: AbilityRepository
+    abilityEntity: AbilityEntity
 ) : ViewModel(){
 
     private val _selectedProperty = MutableLiveData<AbilityEntity>()

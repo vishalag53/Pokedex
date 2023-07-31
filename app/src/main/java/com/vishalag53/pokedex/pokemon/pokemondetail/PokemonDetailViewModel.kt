@@ -11,7 +11,7 @@ import com.vishalag53.pokedex.repository.PokemonRepository
 import kotlinx.coroutines.launch
 
 class PokemonDetailViewModel(
-    private val pokemonEntity: PokemonEntity,
+    pokemonEntity: PokemonEntity,
     private val pokemonRepository: PokemonRepository,
     private val favoriteRepository: FavoriteRepository
 ): ViewModel() {
@@ -53,13 +53,13 @@ class PokemonDetailViewModel(
         if(isFav){
             viewModelScope.launch {
                 favoriteRepository.addOnePokemonEntityInFav(pokemonEntity)
-                pokemonRepository.updatePokemonFav(pokemonEntity.name,isFav)
+                pokemonRepository.updatePokemonFav(pokemonEntity.name,true)
             }
         }
         else{
             viewModelScope.launch {
                 favoriteRepository.deleteOnePokemonEntityInFav(pokemonEntity.name)
-                pokemonRepository.updatePokemonFav(pokemonEntity.name,isFav)
+                pokemonRepository.updatePokemonFav(pokemonEntity.name,false)
             }
         }
     }

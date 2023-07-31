@@ -1,5 +1,6 @@
 package com.vishalag53.pokedex.ability.abilitydetail
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,18 +10,10 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
 import androidx.core.app.ShareCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.lifecycle.ViewModelProvider
-import com.vishalag53.pokedex.MyApplication
 import com.vishalag53.pokedex.R
 import com.vishalag53.pokedex.databinding.FragmentAbilityDetailBinding
-import com.vishalag53.pokedex.network.PokemonApi
-import com.vishalag53.pokedex.network.PokemonApiUtilities
-import com.vishalag53.pokedex.repository.AbilityRepository
 
 @Suppress("DEPRECATION")
 class AbilityDetailFragment : Fragment() {
@@ -30,21 +23,18 @@ class AbilityDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
-        val application = requireNotNull(this.activity).application as MyApplication
 
         binding = FragmentAbilityDetailBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val pokemonApi = PokemonApiUtilities.getInstance().create(PokemonApi::class.java)
-        val abilityRepository = AbilityRepository(pokemonApi, application.daoDatabaseAbility)
 
         val abilityEntity = AbilityDetailFragmentArgs.fromBundle(requireArguments()).selectedPropertyAbility
 
         ViewModelProvider(
             this,
-            AbilityDetailViewModelFactory(abilityEntity,abilityRepository)
+            AbilityDetailViewModelFactory(abilityEntity)
         )[AbilityDetailViewModel::class.java].also { viewModel = it }
 
         binding.viewModel = viewModel
@@ -68,6 +58,8 @@ class AbilityDetailFragment : Fragment() {
         startActivity(getShareIntent())
     }
 
+    @Deprecated("Deprecated in Java")
+    @SuppressLint("QueryPermissionsNeeded")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.share_menu,menu)
@@ -76,6 +68,7 @@ class AbilityDetailFragment : Fragment() {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             R.id.shareMenu -> shareSuccess()

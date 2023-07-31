@@ -50,6 +50,5 @@
             app:queryHint="Search Ability"
             tools:ignore="RtlHardcoded" />
 
-
     </FrameLayout>
 </layout>

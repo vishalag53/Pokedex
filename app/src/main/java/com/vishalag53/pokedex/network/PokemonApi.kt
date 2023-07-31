@@ -1,12 +1,10 @@
 package com.vishalag53.pokedex.network
 
-import com.vishalag53.pokedex.response.AbilityInfo
-import com.vishalag53.pokedex.response.AbilityList
-import com.vishalag53.pokedex.response.PokemonEvolutionChain
-import com.vishalag53.pokedex.response.PokemonInfo
-import com.vishalag53.pokedex.response.PokemonList
-import com.vishalag53.pokedex.response.PokemonMove
-import com.vishalag53.pokedex.response.PokemonSpeciesInfo
+import com.vishalag53.pokedex.response.ability.AbilityList
+import com.vishalag53.pokedex.response.abilityInfo.AbilityInfo
+import com.vishalag53.pokedex.response.pokemon.PokemonList
+import com.vishalag53.pokedex.response.pokemonInfo.PokemonInfo
+import com.vishalag53.pokedex.response.pokemonSpecies.PokemonSpeciesInfo
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -27,19 +25,6 @@ interface PokemonApi {
     suspend fun getPokemonSpeciesInfo(
         @Path("id") id: Int
     ): Response<PokemonSpeciesInfo>
-
-
-//    @GET("evolution-chain/{id}")
-//    suspend fun getPokemonEvolutionChain(
-//        @Path("id") id: String
-//    ): Response<PokemonEvolutionChain>
-
-
-    @GET("move/{name}")
-    suspend fun getPokemonMove(
-        @Path("name") name: String
-    ): Response<PokemonMove>
-
 
     @GET("ability?offset=0&limit=358")
     suspend fun getAbilityList() : Response<AbilityList>

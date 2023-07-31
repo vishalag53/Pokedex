@@ -1,10 +1,10 @@
 package com.vishalag53.pokedex.util
 
 import com.vishalag53.pokedex.R
-import com.vishalag53.pokedex.response.EffectEntryXX
-import com.vishalag53.pokedex.response.EggGroup
-import com.vishalag53.pokedex.response.PokemonInfo
-import com.vishalag53.pokedex.response.PokemonX
+import com.vishalag53.pokedex.response.abilityInfo.EffectEntryX
+import com.vishalag53.pokedex.response.abilityInfo.Pokemon
+import com.vishalag53.pokedex.response.pokemonInfo.PokemonInfo
+import com.vishalag53.pokedex.response.pokemonSpecies.EggGroup
 
 
 fun getId(id: String): String = when (id.length) {
@@ -34,7 +34,7 @@ fun getBkgColor(name: String?): Int = when (name) {
     else -> R.color.TypeNormal
 }
 
-fun getTotal(pokemonInfo: PokemonInfo): String? {
+fun getTotal(pokemonInfo: PokemonInfo): String {
     var sum = 0
     for (i in 0 until 6) {
         sum += (pokemonInfo.stats.getOrNull(i)?.base_stat!!)
@@ -52,8 +52,8 @@ fun getEggGroups(eggGroups: List<EggGroup>) : List<String>{
     return eggGroupsList
 }
 
-fun getInDepthEffectFromAbility(effectEntries: List<EffectEntryXX>): String{
-    var inDepthEffect: String = ""
+fun getInDepthEffectFromAbility(effectEntries: List<EffectEntryX>): String{
+    var inDepthEffect = ""
 
     for(effect in effectEntries){
         if(effect.language.name == "en"){
@@ -63,8 +63,8 @@ fun getInDepthEffectFromAbility(effectEntries: List<EffectEntryXX>): String{
     return inDepthEffect
 }
 
-fun getEffectFromAbility(effectEntries: List<EffectEntryXX>): String{
-    var effect: String = ""
+fun getEffectFromAbility(effectEntries: List<EffectEntryX>): String{
+    var effect = ""
 
     for (effect1 in effectEntries){
         if(effect1.language.name == "en"){
@@ -74,11 +74,11 @@ fun getEffectFromAbility(effectEntries: List<EffectEntryXX>): String{
     return effect
 }
 
-fun getPokemonNameListFromAbility(pokemonList: List<PokemonX>) : List<String>{
+fun getPokemonNameListFromAbility(pokemonList: List<Pokemon>) : List<String>{
     val pokemonNameList = mutableListOf<String>()
 
     for(pokemon in pokemonList){
-        var id: Int = getIdFromUrl(pokemon.pokemon.url)
+        val id: Int = getIdFromUrl(pokemon.pokemon.url)
 
         if(id in 1..1010){
             pokemonNameList.add(pokemon.pokemon.name)
@@ -93,54 +93,3 @@ fun getIdFromUrl(url: String): Int{
     val size = s.size
     return s[size-2].toInt()
 }
-
-//fun getPokemonEvolutionChainId(evolutionChainUrl: String): String {
-//    val idRegex = ".*/(\\d+)/$".toRegex()
-//    val matchResult = idRegex.find(evolutionChainUrl)
-//    return matchResult?.groupValues?.getOrNull(1) ?: ""
-//}
-
-//suspend fun getMoveName(moves: List<Move>, pokemonApi: PokemonApi): List<Move_Detail> {
-//
-//    val moveDetailList = mutableListOf<Move_Detail>()
-//
-//    for (i in moves.indices) {
-//        val pokemonMoveResponse = pokemonApi.getPokemonMove(moves[i].move.name)
-//        val pokemonMove = pokemonMoveResponse.body()
-//        val moveDetail = Move_Detail(
-//            moves[i].version_group_details[0].level_learned_at.toString(),
-//            pokemonMove?.power.toString(),
-//            pokemonMove?.accuracy.toString(),
-//            pokemonMove?.damage_class.toString(),
-//            pokemonMove?.type?.name.toString(),
-//            pokemonMove?.pp.toString(),
-//            pokemonMove?.accuracy.toString()
-//        )
-//        moveDetailList.add(moveDetail)
-//    }
-//    return moveDetailList
-//}
-
-//fun getEvolutionChainMinLevels(pokemonEvolutionTo: List<EvolvesTo>): List<String> {
-//    val minLevels = mutableListOf<String>()
-//
-//    for (i in pokemonEvolutionTo.indices) {
-//        for (j in pokemonEvolutionTo[i].evolution_details) {
-//            val minLevel = j.minLevel.toString()
-//            minLevels.add(minLevel)
-//        }
-//    }
-//    return minLevels
-//}
-
-//fun getEvolutionChainSpeciesName(chain: Chain): List<String> {
-//    val speciesList = mutableListOf<String>()
-//
-//    speciesList.add(chain.species.name)
-//
-//    for (i in chain.evolvesTo) {
-//        speciesList.add(i.species.name)
-//    }
-//
-//    return speciesList
-//}

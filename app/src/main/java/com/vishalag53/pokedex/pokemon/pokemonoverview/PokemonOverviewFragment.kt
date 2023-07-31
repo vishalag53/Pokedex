@@ -101,10 +101,10 @@ class PokemonOverviewFragment : Fragment() {
 
         viewModel.currentLayoutType.observe(viewLifecycleOwner) { layoutType ->
             adapters.currentLayoutType = layoutType
-            if (layoutType == PokemonAdapters.LayoutType.GRID) {
-                layoutManager = GridLayoutManager(context, 2)
+            layoutManager = if (layoutType == PokemonAdapters.LayoutType.GRID) {
+                GridLayoutManager(context, 2)
             } else {
-                layoutManager = LinearLayoutManager(context)
+                LinearLayoutManager(context)
             }
             binding.pokemonGrid.layoutManager = layoutManager
         }
@@ -139,6 +139,7 @@ class PokemonOverviewFragment : Fragment() {
         adapters.submitList(filteredList)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.layout_change_menu, menu)
         val toggleBtn = menu.findItem(R.id.layoutChangeMenu)
@@ -152,6 +153,7 @@ class PokemonOverviewFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.layoutChangeMenu -> {

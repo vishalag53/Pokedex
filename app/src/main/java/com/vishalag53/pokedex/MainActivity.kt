@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
@@ -14,7 +13,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.vishalag53.pokedex.databinding.ActivityMainBinding
-import kotlinx.coroutines.CoroutineScope
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,12 +23,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
-
-
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         drawer()
-
     }
 
     fun drawer() {
@@ -60,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.overflow_menu,menu)
+        inflater.inflate(R.menu.fav_menu,menu)
 
         val favMenu = menu?.findItem(R.id.favMenu)
 

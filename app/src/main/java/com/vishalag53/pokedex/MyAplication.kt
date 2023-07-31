@@ -59,6 +59,5 @@ class MyApplication: Application() {
             .build()
 
         daoDatabaseAbility = databaseAbility.abilityDatabaseDao()
-
     }
 }

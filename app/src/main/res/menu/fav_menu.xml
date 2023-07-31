@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/layoutChangeMenu"
+        android:id="@+id/favMenu"
         android:enabled="true"
-        android:icon="@drawable/view_list_48px"
-        android:title="@string/change_in_list"
-        android:visible="true" />
-
-    <item
-        android:id="@+id/deleteAllFav"
-        android:enabled="true"
-        android:icon="@drawable/baseline_delete_24"
-        android:title="@string/delete_all"
-        android:visible="true" />
+        android:icon="@drawable/baseline_favorite_24"
+        android:title="@string/favorite"
+        android:visible="true"
+        app:showAsAction="ifRoom" />
 
 </menu>
