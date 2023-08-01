@@ -9,6 +9,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -51,6 +52,8 @@ class PokedexDetailFragment : Fragment() {
         )[PokedexDetailViewModel::class.java].also { viewModel = it }
 
         binding.viewModel = viewModel
+
+        setActionBarContains(pokemonEntity.id,pokemonEntity.name.uppercase())
 
         // add or remove from favorite
 
@@ -108,5 +111,10 @@ class PokedexDetailFragment : Fragment() {
             R.id.shareMenu -> shareSuccess()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setActionBarContains(id: String,name: String) {
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.setPokemonName,id,name)
     }
 }

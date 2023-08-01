@@ -10,6 +10,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ShareCompat
 import androidx.lifecycle.ViewModelProvider
 import com.vishalag53.pokedex.R
@@ -31,6 +32,8 @@ class AbilityDetailFragment : Fragment() {
 
 
         val abilityEntity = AbilityDetailFragmentArgs.fromBundle(requireArguments()).selectedPropertyAbility
+
+        setActionBarContains(abilityEntity.name.uppercase())
 
         ViewModelProvider(
             this,
@@ -74,6 +77,11 @@ class AbilityDetailFragment : Fragment() {
             R.id.shareMenu -> shareSuccess()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setActionBarContains(name: String) {
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.setAbilityName,name)
     }
 
 }

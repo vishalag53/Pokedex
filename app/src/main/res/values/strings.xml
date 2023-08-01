@@ -38,4 +38,6 @@
     <string name="ability">Ability</string>
     <string name="pokemon">Pokemon</string>
     <string name="share">Share</string>
+    <string name="setPokemonName">%1$s %2$s</string>
+    <string name="setAbilityName">%1$s</string>
 </resources>
