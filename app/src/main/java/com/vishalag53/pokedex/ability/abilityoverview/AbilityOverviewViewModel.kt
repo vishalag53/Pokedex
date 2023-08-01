@@ -19,8 +19,9 @@ class AbilityOverviewViewModel(private val abilityRepository: AbilityRepository)
     }
 
     init {
-        viewModelScope.launch (Dispatchers.IO){
-            //pokemonRepository.getAbilityListView()
+        viewModelScope.launch{
+            //abilityRepository.getAbilityListView()
+            //abilityRepository.deleteAllAbility()
         }
     }
 

@@ -26,7 +26,7 @@ class FavoriteAdapters (
     class GridPokemonViewHolder(private var binding: GridListItemPokedexBinding): RecyclerView.ViewHolder(binding.root){
         val gridListItemPokemon: ConstraintLayout = binding.gridListItemPokemon
         fun bind(pokedexEntity: PokedexEntity) {
-            binding.pokemonEntity = pokedexEntity
+            binding.pokedexEntity = pokedexEntity
             binding.executePendingBindings()
         }
     }
@@ -37,7 +37,7 @@ class FavoriteAdapters (
         val linearListItemPokemon: ConstraintLayout = binding.linearListItemPokemon
 
         fun bind(pokedexEntity: PokedexEntity) {
-            binding.pokemonEntity = pokedexEntity
+            binding.pokedexEntity = pokedexEntity
             binding.executePendingBindings()
         }
     }

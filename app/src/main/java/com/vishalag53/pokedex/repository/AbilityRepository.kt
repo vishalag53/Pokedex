@@ -43,4 +43,8 @@ class AbilityRepository(
     suspend fun getOneAbilityDetail(name: String): AbilityEntity? {
         return abilityDatabaseDao.getOneAbilityDetailListView(name)
     }
+
+    suspend fun deleteAllAbility(){
+        abilityDatabaseDao.deleteAllAbility()
+    }
 }

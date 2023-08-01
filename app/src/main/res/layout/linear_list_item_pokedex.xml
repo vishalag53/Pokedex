@@ -5,7 +5,7 @@
 
     <data>
         <variable
-            name="pokemonEntity"
+            name="pokedexEntity"
             type="com.vishalag53.pokedex.database.pokedexDatabase.PokedexEntity" />
     </data>
 
@@ -32,7 +32,7 @@
                 android:background="@drawable/half_rounded_corner"
                 android:contentDescription="@string/pokemon_image"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{pokemonEntity.frontDefault}"
+                app:imageUrl="@{pokedexEntity.frontDefault}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -49,7 +49,7 @@
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:textIfNull="@{pokemonEntity.id}"
+                app:textIfNull="@{pokedexEntity.id}"
                 tools:text="#658" />
 
             <TextView
@@ -64,7 +64,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/imgPokemon"
                 app:layout_constraintStart_toEndOf="@+id/txtNumber"
                 app:layout_constraintTop_toTopOf="parent"
-                app:textIfNull="@{pokemonEntity.name}"
+                app:textIfNull="@{pokedexEntity.name}"
                 tools:text="GreNinja" />
 
             <TextView
@@ -79,7 +79,7 @@
                 app:layout_constraintEnd_toStartOf="@+id/txtType2"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtNumber"
-                app:textIfNull="@{pokemonEntity.type1}"
+                app:textIfNull="@{pokedexEntity.type1}"
                 tools:text="Water" />
 
             <TextView
@@ -92,7 +92,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/imgPokemon"
                 app:layout_constraintTop_toBottomOf="@+id/txtName"
-                app:textIfNull="@{pokemonEntity.type2}"
+                app:textIfNull="@{pokedexEntity.type2}"
                 tools:text="Dark" />
 
 

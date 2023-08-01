@@ -30,7 +30,7 @@ class PokedexAdapters(
         val gridListItemPokemon: ConstraintLayout = binding.gridListItemPokemon
 
         fun bind(pokedexEntity: PokedexEntity) {
-            binding.pokemonEntity = pokedexEntity
+            binding.pokedexEntity = pokedexEntity
             binding.executePendingBindings()
         }
     }
@@ -41,7 +41,7 @@ class PokedexAdapters(
         val linearListItemPokemon: ConstraintLayout = binding.linearListItemPokemon
 
         fun bind(pokedexEntity: PokedexEntity) {
-            binding.pokemonEntity = pokedexEntity
+            binding.pokedexEntity = pokedexEntity
             binding.executePendingBindings()
         }
     }
