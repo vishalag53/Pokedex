@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vishalag53.pokedex.databinding.ActivityMainBinding
@@ -33,6 +34,39 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.frameLayout) as NavHostFragment
         navController = navHostFragment.navController
         bottomNavigationView.setupWithNavController(navController)
+
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.pokedexOverviewFragment,R.id.abilityOverviewFragment,R.id.favoriteOverviewFragment),binding.drawerLayout)
+        setupActionBarWithNavController(navController,appBarConfiguration)
+
+        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
+            when (menuItem.itemId){
+                R.id.pokedexOverviewFragment -> {
+                    if (navController.currentDestination?.id == R.id.pokedexDetailFragment){
+                        navController.popBackStack(R.id.pokedexOverviewFragment,false)
+                    }
+                    else{
+                        navController.navigate(R.id.pokedexOverviewFragment)
+                    }
+                }
+                R.id.abilityOverviewFragment -> {
+                    if (navController.currentDestination?.id == R.id.abilityDetailFragment){
+                        navController.popBackStack(R.id.abilityOverviewFragment,false)
+                    }
+                    else{
+                        navController.navigate(R.id.abilityOverviewFragment)
+                    }
+                }
+                R.id.favoriteOverviewFragment -> {
+                    if (navController.currentDestination?.id == R.id.pokedexDetailFragment){
+                        navController.popBackStack(R.id.favoriteOverviewFragment,false)
+                    }
+                    else{
+                        navController.navigate(R.id.favoriteOverviewFragment)
+                    }
+                }
+            }
+            true
+        }
 
     }
 
@@ -59,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         return NavigationUI.navigateUp(navController, appBarConfiguration)
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         val navController = findNavController(R.id.frameLayout)
         if (navController.currentDestination?.id != R.id.pokedexOverviewFragment){
